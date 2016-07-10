@@ -1,5 +1,15 @@
 {
 	"predef": [ "document", "jQuery", "$", "console" ],
 	"esversion": 6,
-	"globalstrict": true
+	"globalstrict": true,
+  "browserify": true,
+  "globals": {
+  "describe": false,
+  "it": false,
+  "expect": false,
+  "before": false,
+  "beforeEach": false,
+  "after": false,
+  "afterEach": false
+  }
 }
