@@ -1,19 +1,16 @@
 "use strict";
+// Defining base object for robot
+let Battledome = {};
 
-const Type = require('./type');
-// const Model = require('./model');
-
-var Robot = Robot || {};
-Robot.Adversaries = {};
-
-
-Robot.Adversaries.Player = function(name) {
-	this.playerName = name || "unknown adventurer";
+// Defining a base robot
+Battledome.Robot = function(name) {
+	this.playerName = name || "unknown robot";
+	this.type = null;
   this.health = Math.floor(Math.random() * 40 + 50);
-  this.parts = ["head", "neck", "arm", "leg", "torso"];
-  this.strength = 90;
-  this.intelligence = 90;
-  this.dexterity = 90;
+  this.damage = 0;
+  this.shield = 0;
+  this.evade = 0;
 };
+console.log("Battledome", Battledome.Robot);
 
-module.exports = Robot;
+module.exports = Battledome;

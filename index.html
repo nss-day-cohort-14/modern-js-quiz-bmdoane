@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Modern-JS-Quiz</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/quiz.css">
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -16,17 +17,49 @@
 	  </div>
 	</nav>
 	<div class="container-fluid">
-		<div id="name">
-			<div class="input-group">
-			  <span class="input-group-addon" id="basic-addon1">Player 1</span>
-			  <input type="text" class="form-control" placeholder="Enter Your Name" aria-describedby="basic-addon1">
-			</div>
-			<div class="input-group">
-			  <input type="text" class="form-control" placeholder="Enter Your Name" aria-describedby="basic-addon2">
-			  <span class="input-group-addon" id="basic-addon2">Player 2</span>
-			</div>
-		</div> <!-- name -->
+		<div id="battlefield">
+
+			<div class= "row">
+				<div id="nameOne" class="col-md-4 player">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon1">Player 1</span>
+					  <input type="text" class="form-control" placeholder="Enter Your Name" aria-describedby="basic-addon1">
+					</div>
+				</div> <!-- nameOne -->
+				<div id="playerOneSelect" class="col-md-1 robPic">
+					selected
+					robot
+				</div>
+				<div id="vs" class="col-md-2">
+					<h3>Vs.</h3>
+				</div>
+				<div id="playerTwoSelect" class="col-md-1 robPic">
+					selected
+					robot
+				</div>
+				<div id="nameTwo" class="col-md-4 player">
+					<div class="input-group">
+					  <input type="text" class="form-control" placeholder="Enter Your Name" aria-describedby="basic-addon2">
+					  <span class="input-group-addon" id="basic-addon2">Player 2</span>
+					</div>
+				</div> <!-- name -->
+			</div> <!-- row	 -->
+			<div class="row">
+				<div id="select">
+					<div class="page-load">
+						<h1>Welcome to Robot Battledome!</h1>
+						<p>Enter a name and choose your robot to do battle.</p>
+					</div>
+					<!-- In this row will be the 6 robot possibilities.  Show after -->
+				</div>
+			</div> <!-- row	 -->
+		</div> <!-- battlefield -->
 	</div> <!-- container fluid -->	
+	<footer class="footer navbar-fixed-bottom">
+	     <div class="container-fluid">
+	     	<p class="copy">Copyright <span class="glyphicon glyphicon-copyright-mark"></span> Robot Battledome all rights reserved.  2016</p>
+	     </div>
+	</footer>
 	<script src="dist/bundle.js"></script>	
 </body>
 </html>

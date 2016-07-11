@@ -8,38 +8,158 @@ var $ = require('jquery');
 
 $(document).ready(function() {
 
-});	
+	console.log("hello");
+
+});
+
+// Base Logical Requirements
+
+// Define three robot type functions (e.g. Drone, Bipedal, ATV).
+// Define at least 2 specific robot model functions for each type.
+// Give each robot model a different range of health. For example, one model can have health range of 50-80, and another one will have a range of 60-120. To accomplish this, read about the Math.random() function in JavaScript.
+// Give each robot model a different range of damage they do using the same technique.
+
+// Base Functional Requirements
+
+// You must also provide a select element underneath each text input so that the user can select one of the 6 robot models you defined.
+// Provide a Attack! button that, when clicked, simply applies the damage output of each robot against the other one.
+// Once either robot's health is <0 display a message that the battle is over, and which one won. For example...
+// The Viper Drone defeated the Behemoth ATV with its flamethrower.
+
+// Bonus Goals
+
+// Bonus Logical Requirements
+
+// These are completely optional, once you have the basic requirements met and want to practice object composition.
+
+// Define at least six different modifications and six different weapons that can be added to a robot.
+// Each modification should provide some combination of the following benefits - increased protection, increased damage, or evasion capability (ability to avoid some attacks).
+// Define the range of damage that each weapon can do.
+// Bonus Functional Requirements
+
+// If you have completed the base requirements, and want to explore object composition more, you may choose to implement these requirements. They are completely optional.
+
+// When your user interface first loads, provide the user with buttons so that one specific robot model can be chosen as Player 1.
+// Once the user selects a robot model for Player 1, show a button for each weapon that can be added to the robot.
+// Once the user selects a weapon for Player 1, show a button for each modification that can be added to the robot.
+// Once Player 1 has a modification, provide the user with buttons so that one specific robot model can be chosen as Player 2.
+// Once the user selects a robot model for Player 2, show a button for each weapon that can be added to the robot.
+// Once the user selects a weapon for Player 2, show a button for each modification that can be added to the robot.
+// Once the modification for Player 2 is chosen, the battle begins.
+// Each round of battle should determine the amount of damage each robot will do with its weapon.
+// That damage should then be adjusted based on the modifications that it has, and what its opponent has.
+// Rounds continue until one of the robots has 0, or less than 0, health.
+// When the battle is over display the outcome to the user. For example...
+// The Viper Drone defeated the Behemoth ATV with its flamethrower.	
 },{"./model":2,"./robot":3,"./type":4,"jquery":5}],2:[function(require,module,exports){
 "use strict";
-},{}],3:[function(require,module,exports){
-"use strict";
 
-const Type = require('./type');
-// const Model = require('./model');
+const Battledome = require('./robot');
+// const Type = require('./type');
 
-var Robot = Robot || {};
-Robot.Adversaries = {};
+Battledome.Warehouse = {};
+// // Define at least 2 specific robot model functions for each type.
+// // Give each robot model a different range of health. For example, one model can have health range of 50-80, and another one will have a range of 60-120. To accomplish this, read about the Math.random() function in JavaScript.
+// // Give each robot model a different range of damage they do using the same technique.
 
-
-Robot.Adversaries.Player = function(name) {
-	this.playerName = name || "unknown adventurer";
-  this.health = Math.floor(Math.random() * 40 + 50);
-  this.parts = ["head", "neck", "arm", "leg", "torso"];
-  this.strength = 90;
-  this.intelligence = 90;
-  this.dexterity = 90;
+Battledome.Warehouse.ModelOne = function() {
+	this.healthBonus = 1;
+  this.damageBonus = 1;
+  this.shieldBonus = 1;
+  this.evadeBonus = 1;
 };
+Battledome.Warehouse.ModelOne.prototype = new Battledome.TypeOne();
+console.log("Battledome.Warehouse", Battledome.Warehouse);
 
-module.exports = Robot;
-},{"./type":4}],4:[function(require,module,exports){
+Battledome.Warehouse.ModelTwo = function() {
+	this.healthBonus = 2;
+  this.damageBonus = 2;
+  this.shieldBonus = 2;
+  this.evadeBonus = 2;
+};
+Battledome.Warehouse.ModelTwo.prototype = new Battledome.TypeOne();
+
+Battledome.Warehouse.ModelThree = function() {
+	this.healthBonus = 3;
+  this.damageBonus = 3;
+  this.shieldBonus = 3;
+  this.evadeBonus = 3;
+};
+Battledome.Warehouse.ModelThree.prototype = new Battledome.TypeTwo();
+
+Battledome.Warehouse.ModelFour = function() {
+	this.healthBonus = 4;
+  this.damageBonus = 4;
+  this.shieldBonus = 4;
+  this.evadeBonus = 4;
+};
+Battledome.Warehouse.ModelFour.prototype = new Battledome.TypeTwo();
+
+Battledome.Warehouse.ModelFive = function() {
+	this.healthBonus = 5;
+  this.damageBonus = 5;
+  this.shieldBonus = 5;
+  this.evadeBonus = 5;
+};
+Battledome.Warehouse.ModelFive.prototype = new Battledome.TypeThree();
+
+Battledome.Warehouse.ModelSix = function() {
+	this.healthBonus = 6;
+  this.damageBonus = 6;
+  this.shieldBonus = 6;
+  this.evadeBonus = 6;
+};
+Battledome.Warehouse.ModelSix.prototype = new Battledome.TypeThree();
+
+console.log("Battledome.Warehouse", Battledome.Warehouse);
+
+let player1 = new Battledome.Warehouse.ModelFive;
+console.log("player1", player1);
+
+module.exports = Battledome;
+// Look out for Robot.type.model for export
+
+},{"./robot":3}],3:[function(require,module,exports){
 "use strict";
+// Defining base object for robot
+let Battledome = {};
 
-const Robot = require('./robot');
-// const Model = require('./model');
+// Defining a base robot
+Battledome.Robot = function(name) {
+	this.playerName = name || "unknown robot";
+	this.type = null;
+  this.health = Math.floor(Math.random() * 40 + 50);
+  this.damage = 0;
+  this.shield = 0;
+  this.evade = 0;
+};
+console.log("Battledome", Battledome.Robot);
 
-Robot.Warehouse = {};
+module.exports = Battledome;
+},{}],4:[function(require,module,exports){
+"use strict";
+// Requirements should flow in a direction and not step on each other
+const Battledome = require('./robot');
 
-module.exports = Robot;
+// Need three type constructor functions
+Battledome.TypeOne = function() {
+	this.type = "type one";
+};
+Battledome.TypeOne.prototype = new Battledome.Robot();
+
+Battledome.TypeTwo = function() {
+	this.type = "type two";
+};
+Battledome.TypeTwo.prototype = new Battledome.Robot();
+
+Battledome.TypeThree = function() {
+	this.type = "type three";
+};
+Battledome.TypeThree.prototype = new Battledome.Robot();
+
+console.log("Type", Battledome.TypeOne);
+
+module.exports = Battledome;
 },{"./robot":3}],5:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
