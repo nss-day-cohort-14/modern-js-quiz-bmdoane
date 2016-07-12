@@ -1,13 +1,13 @@
 body {
 	width: 100%;
 	/* Margin bottom by footer height */
-/*  margin-bottom: 60px;*/
+  margin-bottom: 100px;
 }
 
 /***********************
 *** Battlefield View ***
 ***********************/
-#battlefield {
+#battlefield-wrapper {
 	width: 90%;
 	margin: 0 auto;
 }
@@ -26,6 +26,14 @@ body {
 .page-load {
 	text-align: center;
 }
+
+.robots-load {
+	text-align: center;
+}
+ 
+button {
+	margin: 20px;
+} 
 
 /* Footer */
 .footer {

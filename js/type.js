@@ -1,30 +1,35 @@
 "use strict";
 // Requirements should flow in a direction and not step on each other
-const Battledome = require('./robot');
+const Robot = require('./robot');
 
+let Type = {};
 // Need three type constructor functions
 // Game balancing - Building damage less to more with types
-Battledome.TypeOne = function() {
+Type.TypeOne = function() {
 	this.type = "type one";
 	this.health = Math.floor(Math.random() * 40 + 70);
 	this.damage = Math.floor(Math.random() * 10 + 5);
+	this.shield = 25;
+  this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?
 };
-Battledome.TypeOne.prototype = new Battledome.Robot();
+Type.TypeOne.prototype = new Robot();
 
-Battledome.TypeTwo = function() {
+Type.TypeTwo = function() {
 	this.type = "type two";
 	this.health = Math.floor(Math.random() * 40 + 60);
 	this.damage = Math.floor(Math.random() * 10 + 10);
+  this.shield = 25;
+  this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
 };
-Battledome.TypeTwo.prototype = new Battledome.Robot();
+Type.TypeTwo.prototype = new Robot();
 
-Battledome.TypeThree = function() {
+Type.TypeThree = function() {
 	this.type = "type three";
 	this.health = Math.floor(Math.random() * 40 + 50);
 	this.damage = Math.floor(Math.random() * 10 + 15);
+  this.shield = 25;
+  this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
 };
-Battledome.TypeThree.prototype = new Battledome.Robot();
+Type.TypeThree.prototype = new Robot();
 
-console.log("Type", Battledome.TypeOne);
-
-module.exports = Battledome;
+module.exports = Type;

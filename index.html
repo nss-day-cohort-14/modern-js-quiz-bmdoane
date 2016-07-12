@@ -17,13 +17,13 @@
 	  </div>
 	</nav>
 	<div class="container-fluid">
-		<div id="battlefield">
+		<div id="battlefield-wrapper">
 
 			<div class= "row">
 				<div id="nameOne" class="col-md-4 player">
 					<div class="input-group">
 					  <span class="input-group-addon" id="basic-addon1">Player 1</span>
-					  <input type="text" class="form-control" placeholder="Enter Your Name" aria-describedby="basic-addon1">
+					  <input type="text" class="form-control" id="inputOne" placeholder="Enter Your Name" aria-describedby="basic-addon1">
 					</div>
 				</div> <!-- nameOne -->
 				<div id="playerOneSelect" class="col-md-1 robPic">
@@ -39,21 +39,101 @@
 				</div>
 				<div id="nameTwo" class="col-md-4 player">
 					<div class="input-group">
-					  <input type="text" class="form-control" placeholder="Enter Your Name" aria-describedby="basic-addon2">
+					  <input type="text" class="form-control" id="inputTwo" placeholder="Enter Your Name" aria-describedby="basic-addon2">
 					  <span class="input-group-addon" id="basic-addon2">Player 2</span>
 					</div>
 				</div> <!-- name -->
 			</div> <!-- row	 -->
-			<div class="row">
-				<div id="select">
-					<div class="page-load">
-						<h1>Welcome to Robot Battledome!</h1>
-						<p>Enter a name and choose your robot to do battle.</p>
-					</div>
-					<!-- In this row will be the 6 robot possibilities.  Show after -->
+
+			
+			<div id="battlefield">
+				<div class="page-load">
+					<h1>Welcome to Robot Battledome!</h1>
+					<p>Enter a name and choose your robot to do battle.</p>
 				</div>
-			</div> <!-- row	 -->
-		</div> <!-- battlefield -->
+				
+				<div class="robots-load">
+					<h3>Choose your robot:</h3>				
+					<div class="row">
+						<div class="col-md-4">
+							<button class="btn btn-primary" id="one">Robo-Model 1</button>
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-primary" id="two">Robo-Model 2</button>	
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-primary" id="three">Robo-Model 3</button>					
+						</div>												
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<button class="btn btn-primary" id="four">Robo-Model 4</button>
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-primary" id="five">Robo-Model 5</button>								
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-primary" id="six">Robo-Model 6</button>								
+						</div>						
+					</div>
+				<div>
+
+				<div class="weapons-load">
+					<h3>Choose a weapon:</h3>
+					<div class="row">
+						<div class="col-md-4">
+							<button class="btn btn-default" id="weapon-one">The Punisher</button>
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-default" id="weapon-two">The Laugher</button>	
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-default" id="weapon-three">Lucille</button>					
+						</div>												
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<button class="btn btn-default" id="weapon-four">Betsy</button>
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-default" id="weapon-five">The De-limb-er-ator</button>								
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-default" id="weapon-six">Norman</button>								
+						</div>						
+					</div>
+				<div>
+
+				<div class="mods-load">
+					<h3>Choose a modification:</h3>
+					<div class="row">
+						<div class="col-md-4">
+							<button class="btn btn-success" id="mod-one">Shadow</button>
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-success" id="mod-two">Sneaky</button>	
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-danger" id="mod-three">Double Fisted</button>					
+						</div>												
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<button class="btn btn-danger" id="mod-four">Hammer Stomp</button>
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-warning" id="mod-five">Force Shield</button>								
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-warning" id="mod-six">Clones</button>								
+						</div>						
+					</div>
+				<div>				
+
+			</div> <!-- battlefield -->
+			
+
+		</div> <!-- battlefield-wrapper -->
 	</div> <!-- container fluid -->	
 	<footer class="footer navbar-fixed-bottom">
 	     <div class="container-fluid">

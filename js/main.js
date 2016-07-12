@@ -1,13 +1,16 @@
 "use strict";
 
-const MyQuiz = require('./robot');
+const Robot = require('./robot');
 const Type = require('./type');
 const Model = require('./model');
 var $ = require('jquery');
 
 $(document).ready(function() {
+	console.log("hello nurse");
+	$('.page-load').show();
+	$('#inputOne').focus();
 
-	console.log("hello");
+
 
 });
 
