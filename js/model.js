@@ -64,8 +64,5 @@ Model.ModelSix = function() {
 };
 Model.ModelSix.prototype = new Type.TypeThree();
 
-let player1 = new Model.ModelFour();
-console.log("player1", player1);
-
 module.exports = Model;
 // Look out for Robot.type.model for export

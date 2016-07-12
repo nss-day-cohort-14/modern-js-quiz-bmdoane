@@ -1,9 +1,10 @@
 "use strict";
 
+var $ = require('jquery');
 const Robot = require('./robot');
 const Type = require('./type');
 const Model = require('./model');
-var $ = require('jquery');
+const Create = require('./create');
 
 $(document).ready(function() {
 	console.log("hello nurse");

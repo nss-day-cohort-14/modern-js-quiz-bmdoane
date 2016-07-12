@@ -1,10 +1,156 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
+// Need this for it to work.  Why does it with no module export?
+const Modification = require('./mod');
+
+let AddMod = {};
+
+function addMod(element, player) {
+	switch(element.id) {
+		case "mod-one":
+			player.modification = new Modification.modOne();
+			break;
+		case "mod-two":
+			player.modification = new Modification.modTwo();
+			break;
+		case "mod-three":
+			player.modification = new Modification.modThree();
+			break;
+		case "mod-four":
+			player.modification = new Modification.modFour();
+			break;
+		case "mod-five":
+			player.modification = new Modification.modFive();
+			break;
+		case "mod-six":
+			player.modification = new Modification.modSix();
+			break;
+		default:
+			console.log("This function is broken!");															
+	}
+	return player.modification;
+}
+
+module.exports = AddMod;
+},{"./mod":6}],2:[function(require,module,exports){
+"use strict";
+
+const Model = require('./model');
+
+let AddModel = {};
+
+function addModel(element, player) {
+	switch(element.id) {
+		case "one":
+			player.model = new Model.ModelOne();
+			break;
+		case "two":
+			player.model = new Model.ModelTwo();
+			break;
+		case "three":
+			player.model = new Model.ModelThree();
+			break;
+		case "four":
+			player.model = new Model.ModelFour();
+			break;
+		case "five":
+			player.model = new Model.ModelFive();
+			break;
+		case "six":
+			player.model = new Model.ModelSix();
+			break;
+		default:
+			console.log("This function is broken!");
+	}
+	return player.model;
+}
+
+module.exports = AddModel;
+},{"./model":7}],3:[function(require,module,exports){
+"use strict";
+
+// Need this for it to work.  Why does it with no module export?
+const Weapon = require('./weapons');
+
+let AddWeapon = {};
+
+function addWeapon(element, player) {
+	switch(element.id) {
+		case "weapon-one":
+			player.weapon = new Weapon.weaponOne();
+			break;
+		case "weapon-two":
+			player.weapon = new Weapon.weaponTwo();
+			break;
+		case "weapon-three":
+			player.weapon = new Weapon.weaponThree();
+			break;
+		case "weapon-four":
+			player.weapon = new Weapon.weaponFour();
+			break;
+		case "weapon-five":
+			player.weapon = new Weapon.weaponFive();
+			break;
+		case "weapon-six":
+			player.weapon = new Weapon.weaponSix();
+			break;
+		default:
+			console.log("This function is broken!");															
+	}
+	return player.weapon;
+}
+
+module.exports = AddWeapon;
+},{"./weapons":10}],4:[function(require,module,exports){
+"use strict";
+console.log("hey");
+
+// What is needed and is this the right way to require type and model
+var $ = require('jquery');
 const Robot = require('./robot');
 const Type = require('./type');
 const Model = require('./model');
+const Weapon = require('./weapons');
+const AddModel = require('./addModel');
+const AddWeapon = require('./addWeapon');
+const AddMod = require('./addMod');
+
+
+// Do I have to go through all this bullshit or just declare let playerOne and let playerTwo?
+let Create = {};
+Create.playerOne = {};
+Create.playerTwo = {};
+
+let player = function(name) {
+	this.name = name;
+	this.model = null;
+	this.weapon = null;
+	this.modification = null;
+};
+console.log("player", player);
+
+let player1 = new player();
+let player2 = new player();
+
+player1.model = new Model.ModelOne();
+console.log("player1", player1);
+player1.weapon = new Weapon.weaponOne();
+console.log("player1", player1);
+// Create.buildPlayerObject = function(player) {
+
+// };
+
+
+module.exports = Create;
+},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./model":7,"./robot":8,"./type":9,"./weapons":10,"jquery":11}],5:[function(require,module,exports){
+"use strict";
+
 var $ = require('jquery');
+const Robot = require('./robot');
+const Type = require('./type');
+const Model = require('./model');
+const Create = require('./create');
 
 $(document).ready(function() {
 	console.log("hello nurse");
@@ -54,7 +200,56 @@ $(document).ready(function() {
 // Rounds continue until one of the robots has 0, or less than 0, health.
 // When the battle is over display the outcome to the user. For example...
 // The Viper Drone defeated the Behemoth ATV with its flamethrower.	
-},{"./model":2,"./robot":3,"./type":4,"jquery":5}],2:[function(require,module,exports){
+},{"./create":4,"./model":7,"./robot":8,"./type":9,"jquery":11}],6:[function(require,module,exports){
+"use strict";
+
+// Modification constructor
+let Modification = function() {
+	this.name = "";
+	this.ability = "";
+};
+
+// Evasion related
+let modOne = function() {
+	this.name = "Shadow";
+	this.modType = "evasion";
+};
+modOne.prototype = new Modification();
+
+let modTwo = function() {
+	this.name = "Sneaky";
+	this.modType = "evasion";	
+};
+modTwo.prototype = new Modification();
+
+// Damage related
+let modThree = function() {
+	this.name = "Double Fisted";
+	this.modType = "damage";		
+};
+modThree.prototype = new Modification();
+
+let modFour = function() {
+	this.name = "Hammer Stomp";
+	this.modType = "damage";	
+};
+modFour.prototype = new Modification();
+
+// Protection related
+let modFive = function() {
+	this.name = "Force Shield";
+	this.modType = "protection";		
+};
+modFive.prototype = new Modification();
+
+let modSix = function() {
+	this.name = "Clones";
+	this.modType = "protection";		
+};
+modSix.prototype = new Modification();
+
+module.exports = Modification;
+},{}],7:[function(require,module,exports){
 "use strict";
 
 const Type = require('./type');
@@ -121,13 +316,10 @@ Model.ModelSix = function() {
 };
 Model.ModelSix.prototype = new Type.TypeThree();
 
-let player1 = new Model.ModelFour();
-console.log("player1", player1);
-
 module.exports = Model;
 // Look out for Robot.type.model for export
 
-},{"./type":4}],3:[function(require,module,exports){
+},{"./type":9}],8:[function(require,module,exports){
 "use strict";
 // Defining base object for robot
 let Robot = {};
@@ -143,7 +335,7 @@ Robot = function(name) {
 };
 
 module.exports = Robot;
-},{}],4:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 // Requirements should flow in a direction and not step on each other
 const Robot = require('./robot');
@@ -179,7 +371,55 @@ Type.TypeThree = function() {
 Type.TypeThree.prototype = new Robot();
 
 module.exports = Type;
-},{"./robot":3}],5:[function(require,module,exports){
+},{"./robot":8}],10:[function(require,module,exports){
+"use strict";
+
+// Weapon constructor
+let Weapon = function() {
+	this.name = "";
+	this.damage = 0;
+};
+
+let weaponOne = function() {
+	this.name = "The Punisher";
+	this.damage = this.damage + 5;
+};
+weaponOne.prototype = new Weapon();
+
+let weaponTwo = function() {
+	this.name = "The Laugher";
+	this.damage = this.damage + 7;
+};
+weaponTwo.prototype = new Weapon();
+
+let weaponThree = function() {
+	this.name = "Lucille";
+	this.damage = this.damage + 8;
+};
+weaponThree.prototype = new Weapon();
+
+let weaponFour = function() {
+	this.name = "Betsy";
+	this.damage = this.damage + 9;
+};
+weaponFour.prototype = new Weapon();
+
+let weaponFive = function() {
+	this.name = "The De-limb-er-ator";
+	this.damage = this.damage + 10;
+	this.chanceToLop = 0;
+};
+weaponFive.prototype = new Weapon();
+
+let weaponSix = function() {
+	this.name = "Norman";
+	this.damage = this.damage + 11;
+};
+weaponSix.prototype = new Weapon();
+
+module.exports = Weapon;
+
+},{}],11:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
  * jQuery JavaScript Library v3.1.0
@@ -10255,7 +10495,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[1])
+},{}]},{},[5])
 
 
 //# sourceMappingURL=bundle.js.map

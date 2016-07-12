@@ -44,3 +44,5 @@ let modSix = function() {
 	this.modType = "protection";		
 };
 modSix.prototype = new Modification();
+
+module.exports = Modification;
