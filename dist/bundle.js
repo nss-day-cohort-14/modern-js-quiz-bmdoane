@@ -112,6 +112,7 @@ const Robot = require('./robot');
 const Type = require('./type');
 const Model = require('./model');
 const Weapon = require('./weapons');
+const Modification = require('./mod');
 const AddModel = require('./addModel');
 const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
@@ -128,14 +129,15 @@ let player = function(name) {
 	this.weapon = null;
 	this.modification = null;
 };
-console.log("player", player);
 
-let player1 = new player();
+let player1 = new player("Guy");
 let player2 = new player();
 
 player1.model = new Model.ModelOne();
 console.log("player1", player1);
 player1.weapon = new Weapon.weaponOne();
+console.log("player1", player1);
+player1.modification = new Modification.modOne();
 console.log("player1", player1);
 // Create.buildPlayerObject = function(player) {
 
@@ -143,7 +145,7 @@ console.log("player1", player1);
 
 
 module.exports = Create;
-},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./model":7,"./robot":8,"./type":9,"./weapons":10,"jquery":11}],5:[function(require,module,exports){
+},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./mod":6,"./model":7,"./robot":8,"./type":9,"./weapons":10,"jquery":11}],5:[function(require,module,exports){
 "use strict";
 
 var $ = require('jquery');
@@ -210,43 +212,49 @@ let Modification = function() {
 };
 
 // Evasion related
-let modOne = function() {
+Modification.modOne = function() {
 	this.name = "Shadow";
 	this.modType = "evasion";
+	this.damageBonus = 0;		
 };
-modOne.prototype = new Modification();
+Modification.modOne.prototype = new Modification();
 
-let modTwo = function() {
+Modification.modTwo = function() {
 	this.name = "Sneaky";
-	this.modType = "evasion";	
+	this.modType = "evasion";
+	this.damageBonus = 0;		
 };
-modTwo.prototype = new Modification();
+Modification.modTwo.prototype = new Modification();
 
 // Damage related
-let modThree = function() {
+Modification.modThree = function() {
 	this.name = "Double Fisted";
-	this.modType = "damage";		
+	this.modType = "damage";
+	this.damageBonus = 15;		
 };
-modThree.prototype = new Modification();
+Modification.modThree.prototype = new Modification();
 
-let modFour = function() {
+Modification.modFour = function() {
 	this.name = "Hammer Stomp";
-	this.modType = "damage";	
+	this.modType = "damage";
+	this.damageBonus = 8;			
 };
-modFour.prototype = new Modification();
+Modification.modFour.prototype = new Modification();
 
 // Protection related
-let modFive = function() {
+Modification.modFive = function() {
 	this.name = "Force Shield";
-	this.modType = "protection";		
+	this.modType = "protection";
+	this.damageBonus = 0;			
 };
-modFive.prototype = new Modification();
+Modification.modFive.prototype = new Modification();
 
-let modSix = function() {
+Modification.modSix = function() {
 	this.name = "Clones";
-	this.modType = "protection";		
+	this.modType = "protection";
+	this.damageBonus = 0;			
 };
-modSix.prototype = new Modification();
+Modification.modSix.prototype = new Modification();
 
 module.exports = Modification;
 },{}],7:[function(require,module,exports){
@@ -340,11 +348,14 @@ module.exports = Robot;
 // Requirements should flow in a direction and not step on each other
 const Robot = require('./robot');
 
-let Type = {};
+let Type = function() {
+	this.typeName = null;
+};
+Type.prototype = new Robot();
 // Need three type constructor functions
 // Game balancing - Building damage less to more with types
 Type.TypeOne = function() {
-	this.type = "type one";
+	this.typeName = "type one";
 	this.health = Math.floor(Math.random() * 40 + 70);
 	this.damage = Math.floor(Math.random() * 10 + 5);
 	this.shield = 25;
@@ -353,7 +364,7 @@ Type.TypeOne = function() {
 Type.TypeOne.prototype = new Robot();
 
 Type.TypeTwo = function() {
-	this.type = "type two";
+	this.typeName = "type two";
 	this.health = Math.floor(Math.random() * 40 + 60);
 	this.damage = Math.floor(Math.random() * 10 + 10);
   this.shield = 25;
@@ -362,7 +373,7 @@ Type.TypeTwo = function() {
 Type.TypeTwo.prototype = new Robot();
 
 Type.TypeThree = function() {
-	this.type = "type three";
+	this.typeName = "type three";
 	this.health = Math.floor(Math.random() * 40 + 50);
 	this.damage = Math.floor(Math.random() * 10 + 15);
   this.shield = 25;
@@ -371,51 +382,91 @@ Type.TypeThree = function() {
 Type.TypeThree.prototype = new Robot();
 
 module.exports = Type;
+
+
+// "use strict";
+// // Requirements should flow in a direction and not step on each other
+// const Robot = require('./robot');
+
+// let Type = {};
+// // Need three type constructor functions
+// // Game balancing - Building damage less to more with types
+// Type.TypeOne = function() {
+// 	this.type = "type one";
+// 	this.health = Math.floor(Math.random() * 40 + 70);
+// 	this.damage = Math.floor(Math.random() * 10 + 5);
+// 	this.shield = 25;
+//   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?
+// };
+// Type.TypeOne.prototype = new Robot();
+
+// Type.TypeTwo = function() {
+// 	this.type = "type two";
+// 	this.health = Math.floor(Math.random() * 40 + 60);
+// 	this.damage = Math.floor(Math.random() * 10 + 10);
+//   this.shield = 25;
+//   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
+// };
+// Type.TypeTwo.prototype = new Robot();
+
+// Type.TypeThree = function() {
+// 	this.type = "type three";
+// 	this.health = Math.floor(Math.random() * 40 + 50);
+// 	this.damage = Math.floor(Math.random() * 10 + 15);
+//   this.shield = 25;
+//   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
+// };
+// Type.TypeThree.prototype = new Robot();
+
+// module.exports = Type;
+
+
+
 },{"./robot":8}],10:[function(require,module,exports){
 "use strict";
 
 // Weapon constructor
 let Weapon = function() {
 	this.name = "";
-	this.damage = 0;
+	this.damage = 5;
 };
 
-let weaponOne = function() {
+Weapon.weaponOne = function() {
 	this.name = "The Punisher";
 	this.damage = this.damage + 5;
 };
-weaponOne.prototype = new Weapon();
+Weapon.weaponOne.prototype = new Weapon();
 
-let weaponTwo = function() {
+Weapon.weaponTwo = function() {
 	this.name = "The Laugher";
 	this.damage = this.damage + 7;
 };
-weaponTwo.prototype = new Weapon();
+Weapon.weaponTwo.prototype = new Weapon();
 
-let weaponThree = function() {
+Weapon.weaponThree = function() {
 	this.name = "Lucille";
 	this.damage = this.damage + 8;
 };
-weaponThree.prototype = new Weapon();
+Weapon.weaponThree.prototype = new Weapon();
 
-let weaponFour = function() {
+Weapon.weaponFour = function() {
 	this.name = "Betsy";
 	this.damage = this.damage + 9;
 };
-weaponFour.prototype = new Weapon();
+Weapon.weaponFour.prototype = new Weapon();
 
-let weaponFive = function() {
+Weapon.weaponFive = function() {
 	this.name = "The De-limb-er-ator";
 	this.damage = this.damage + 10;
 	this.chanceToLop = 0;
 };
-weaponFive.prototype = new Weapon();
+Weapon.weaponFive.prototype = new Weapon();
 
-let weaponSix = function() {
+Weapon.weaponSix = function() {
 	this.name = "Norman";
 	this.damage = this.damage + 11;
 };
-weaponSix.prototype = new Weapon();
+Weapon.weaponSix.prototype = new Weapon();
 
 module.exports = Weapon;
 

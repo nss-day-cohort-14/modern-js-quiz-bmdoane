@@ -7,42 +7,48 @@ let Modification = function() {
 };
 
 // Evasion related
-let modOne = function() {
+Modification.modOne = function() {
 	this.name = "Shadow";
 	this.modType = "evasion";
+	this.damageBonus = 0;		
 };
-modOne.prototype = new Modification();
+Modification.modOne.prototype = new Modification();
 
-let modTwo = function() {
+Modification.modTwo = function() {
 	this.name = "Sneaky";
-	this.modType = "evasion";	
+	this.modType = "evasion";
+	this.damageBonus = 0;		
 };
-modTwo.prototype = new Modification();
+Modification.modTwo.prototype = new Modification();
 
 // Damage related
-let modThree = function() {
+Modification.modThree = function() {
 	this.name = "Double Fisted";
-	this.modType = "damage";		
+	this.modType = "damage";
+	this.damageBonus = 15;		
 };
-modThree.prototype = new Modification();
+Modification.modThree.prototype = new Modification();
 
-let modFour = function() {
+Modification.modFour = function() {
 	this.name = "Hammer Stomp";
-	this.modType = "damage";	
+	this.modType = "damage";
+	this.damageBonus = 8;			
 };
-modFour.prototype = new Modification();
+Modification.modFour.prototype = new Modification();
 
 // Protection related
-let modFive = function() {
+Modification.modFive = function() {
 	this.name = "Force Shield";
-	this.modType = "protection";		
+	this.modType = "protection";
+	this.damageBonus = 0;			
 };
-modFive.prototype = new Modification();
+Modification.modFive.prototype = new Modification();
 
-let modSix = function() {
+Modification.modSix = function() {
 	this.name = "Clones";
-	this.modType = "protection";		
+	this.modType = "protection";
+	this.damageBonus = 0;			
 };
-modSix.prototype = new Modification();
+Modification.modSix.prototype = new Modification();
 
 module.exports = Modification;
