@@ -33,7 +33,7 @@ function addMod(element, player) {
 }
 
 module.exports = AddMod;
-},{"./mod":6}],2:[function(require,module,exports){
+},{"./mod":5}],2:[function(require,module,exports){
 "use strict";
 
 const Model = require('./model');
@@ -67,7 +67,7 @@ function addModel(element, player) {
 }
 
 module.exports = AddModel;
-},{"./model":7}],3:[function(require,module,exports){
+},{"./model":6}],3:[function(require,module,exports){
 "use strict";
 
 // Need this for it to work.  Why does it with no module export?
@@ -102,11 +102,9 @@ function addWeapon(element, player) {
 }
 
 module.exports = AddWeapon;
-},{"./weapons":10}],4:[function(require,module,exports){
+},{"./weapons":9}],4:[function(require,module,exports){
 "use strict";
-console.log("hey");
 
-// What is needed and is this the right way to require type and model
 var $ = require('jquery');
 const Robot = require('./robot');
 const Type = require('./type');
@@ -117,47 +115,30 @@ const AddModel = require('./addModel');
 const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
 
-
-// Do I have to go through all this bullshit or just declare let playerOne and let playerTwo?
-let Create = {};
-Create.playerOne = {};
-Create.playerTwo = {};
-
-let player = function(name) {
-	this.name = name;
-	this.model = null;
-	this.weapon = null;
-	this.modification = null;
-};
-
-let player1 = new player("Guy");
-let player2 = new player();
-
-player1.model = new Model.ModelOne();
-console.log("player1", player1);
-player1.weapon = new Weapon.weaponOne();
-console.log("player1", player1);
-player1.modification = new Modification.modOne();
-console.log("player1", player1);
-// Create.buildPlayerObject = function(player) {
-
-// };
-
-
-module.exports = Create;
-},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./mod":6,"./model":7,"./robot":8,"./type":9,"./weapons":10,"jquery":11}],5:[function(require,module,exports){
-"use strict";
-
-var $ = require('jquery');
-const Robot = require('./robot');
-const Type = require('./type');
-const Model = require('./model');
-const Create = require('./create');
-
 $(document).ready(function() {
 	console.log("hello nurse");
+	let player = function(name) {
+		this.name = name;
+		this.model = null;
+		this.weapon = null;
+		this.modification = null;
+	};
+
+	let player1 = new player();
+	let player2 = new player();
+
+	// Page load
 	$('.page-load').show();
 	$('#inputOne').focus();
+
+
+	player1.model = new Model.ModelOne();
+	console.log("player1", player1);
+	player1.weapon = new Weapon.weaponOne();
+	console.log("player1", player1);
+	player1.modification = new Modification.modOne();
+	console.log("player1", player1);
+	console.log("player1.model.damage", player1.model.damage);
 
 
 
@@ -202,7 +183,7 @@ $(document).ready(function() {
 // Rounds continue until one of the robots has 0, or less than 0, health.
 // When the battle is over display the outcome to the user. For example...
 // The Viper Drone defeated the Behemoth ATV with its flamethrower.	
-},{"./create":4,"./model":7,"./robot":8,"./type":9,"jquery":11}],6:[function(require,module,exports){
+},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./mod":5,"./model":6,"./robot":7,"./type":8,"./weapons":9,"jquery":10}],5:[function(require,module,exports){
 "use strict";
 
 // Modification constructor
@@ -257,83 +238,83 @@ Modification.modSix = function() {
 Modification.modSix.prototype = new Modification();
 
 module.exports = Modification;
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
+// This is a variable to the file.  Type.TypeOne would grab object.
 const Type = require('./type');
 
-let Model = {};
-
-Model.ModelOne = function() {
+let ModelOne = function() {
 	this.modelName = "One";
 	this.image = "https://c7.staticflickr.com/8/7386/28210427046_feb79c8c62.jpg";
-	this.healthBonus = 20;
-  this.damageBonus = 0;
+	this.health = 20;
+  this.damage = 0;
   this.shieldBonus = 1;
   this.evadeBonus = 0; // Factor chance just into type??
 };
-Model.ModelOne.prototype = new Type.TypeOne();
+ModelOne.prototype = new Type.TypeOne();
 
-Model.ModelTwo = function() {
+let ModelTwo = function() {
 	this.modelName = "Two";
 	this.image = "https://c7.staticflickr.com/9/8806/28210427006_c32c96429a.jpg";
-	this.healthBonus = 15;
-  this.damageBonus = 2;
+	this.health = 15;
+  this.damage = 2;
   this.shieldBonus = 2;
   this.evadeBonus = 0;
 };
-Model.ModelTwo.prototype = new Type.TypeOne();
+ModelTwo.prototype = new Type.TypeOne();
 
-Model.ModelThree = function() {
+let ModelThree = function() {
 	this.modelName = "Three";
 	this.image = "https://c3.staticflickr.com/9/8579/28140200322_bdc5782582.jpg";
-	this.healthBonus = 15;
-  this.damageBonus = 4;
+	this.health = 15;
+  this.damage = 4;
   this.shieldBonus = 3;
   this.evadeBonus = 0;
 };
-Model.ModelThree.prototype = new Type.TypeTwo();
+ModelThree.prototype = new Type.TypeTwo();
 
-Model.ModelFour = function() {
+let ModelFour = function() {
 	this.modelName = "Four";
 	this.image = "https://c1.staticflickr.com/9/8682/28210426896_d36d679361.jpg";	
-	this.healthBonus = 10;
-  this.damageBonus = 6;
+	this.health = 10;
+  this.damage = 6;
   this.shieldBonus = 4;
   this.evadeBonus = 0;
 };
-Model.ModelFour.prototype = new Type.TypeTwo();
+ModelFour.prototype = new Type.TypeTwo();
 
-Model.ModelFive = function() {
+let ModelFive = function() {
 	this.modelName = "Five";
 	this.image = "https://c1.staticflickr.com/8/7506/28140200152_6b341998a0.jpg";	
-	this.healthBonus = 5;
-  this.damageBonus = 8;
+	this.health = 5;
+  this.damage = 8;
   this.shieldBonus = 5;
   this.evadeBonus = 0;
 };
-Model.ModelFive.prototype = new Type.TypeThree();
+ModelFive.prototype = new Type.TypeThree();
 
-Model.ModelSix = function() {
+let ModelSix = function() {
 	this.modelName = "Six";
 	this.image = "https://c5.staticflickr.com/8/7629/28210426796_aa9cf2f4bd.jpg";	
-	this.healthBonus = 0;
-  this.damageBonus = 10;
+	this.health = 0;
+  this.damage = 10;
   this.shieldBonus = 6;
   this.evadeBonus = 0;
 };
-Model.ModelSix.prototype = new Type.TypeThree();
+ModelSix.prototype = new Type.TypeThree();
 
-module.exports = Model;
-// Look out for Robot.type.model for export
+// Whats available to other files
+module.exports = {ModelOne, ModelTwo, ModelThree, ModelFour, ModelFive, ModelSix};
 
-},{"./type":9}],8:[function(require,module,exports){
+
+},{"./type":8}],7:[function(require,module,exports){
 "use strict";
 // Defining base object for robot
-let Robot = {};
+let Battledome = {};
 
 // Defining a base robot
-Robot = function(name) {
+Battledome.Robot = function(name) {
 	this.playerName = name || "unknown robot";
 	this.type = null;
   this.health = 0;
@@ -342,87 +323,47 @@ Robot = function(name) {
   this.evade = 0;
 };
 
-module.exports = Robot;
-},{}],9:[function(require,module,exports){
+// Look in to always exporting objects.  This did not work without {}.
+module.exports = {Battledome};
+},{}],8:[function(require,module,exports){
 "use strict";
 // Requirements should flow in a direction and not step on each other
-const Robot = require('./robot');
-
-let Type = function() {
-	this.typeName = null;
-};
-Type.prototype = new Robot();
+const RobotFile = require('./robot');
+console.log("RobotFile.Battledome", RobotFile.Battledome);
 // Need three type constructor functions
 // Game balancing - Building damage less to more with types
-Type.TypeOne = function() {
+let TypeOne = function() {
 	this.typeName = "type one";
 	this.health = Math.floor(Math.random() * 40 + 70);
-	this.damage = Math.floor(Math.random() * 10 + 5);
+	this.typeDamage = Math.floor(Math.random() * 10 + 5);
 	this.shield = 25;
   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?
 };
-Type.TypeOne.prototype = new Robot();
+// This is saying new RobotFile(file).Robot(object).Robot(constructor)
+TypeOne.prototype = new RobotFile.Battledome.Robot();
 
-Type.TypeTwo = function() {
+let TypeTwo = function() {
 	this.typeName = "type two";
 	this.health = Math.floor(Math.random() * 40 + 60);
-	this.damage = Math.floor(Math.random() * 10 + 10);
+	this.typeDamage = Math.floor(Math.random() * 10 + 10);
   this.shield = 25;
   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
 };
-Type.TypeTwo.prototype = new Robot();
+TypeTwo.prototype = new RobotFile.Battledome.Robot();
 
-Type.TypeThree = function() {
+let TypeThree = function() {
 	this.typeName = "type three";
 	this.health = Math.floor(Math.random() * 40 + 50);
-	this.damage = Math.floor(Math.random() * 10 + 15);
+	this.typeDamage = Math.floor(Math.random() * 10 + 15);
   this.shield = 25;
   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
 };
-Type.TypeThree.prototype = new Robot();
+TypeThree.prototype = new RobotFile.Battledome.Robot();
 
-module.exports = Type;
+// This is exporting constructors
+module.exports = {TypeOne, TypeTwo, TypeThree};
 
-
-// "use strict";
-// // Requirements should flow in a direction and not step on each other
-// const Robot = require('./robot');
-
-// let Type = {};
-// // Need three type constructor functions
-// // Game balancing - Building damage less to more with types
-// Type.TypeOne = function() {
-// 	this.type = "type one";
-// 	this.health = Math.floor(Math.random() * 40 + 70);
-// 	this.damage = Math.floor(Math.random() * 10 + 5);
-// 	this.shield = 25;
-//   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?
-// };
-// Type.TypeOne.prototype = new Robot();
-
-// Type.TypeTwo = function() {
-// 	this.type = "type two";
-// 	this.health = Math.floor(Math.random() * 40 + 60);
-// 	this.damage = Math.floor(Math.random() * 10 + 10);
-//   this.shield = 25;
-//   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
-// };
-// Type.TypeTwo.prototype = new Robot();
-
-// Type.TypeThree = function() {
-// 	this.type = "type three";
-// 	this.health = Math.floor(Math.random() * 40 + 50);
-// 	this.damage = Math.floor(Math.random() * 10 + 15);
-//   this.shield = 25;
-//   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
-// };
-// Type.TypeThree.prototype = new Robot();
-
-// module.exports = Type;
-
-
-
-},{"./robot":8}],10:[function(require,module,exports){
+},{"./robot":7}],9:[function(require,module,exports){
 "use strict";
 
 // Weapon constructor
@@ -470,7 +411,7 @@ Weapon.weaponSix.prototype = new Weapon();
 
 module.exports = Weapon;
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
  * jQuery JavaScript Library v3.1.0
@@ -10546,7 +10487,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[5])
+},{}]},{},[4])
 
 
 //# sourceMappingURL=bundle.js.map

@@ -4,12 +4,36 @@ var $ = require('jquery');
 const Robot = require('./robot');
 const Type = require('./type');
 const Model = require('./model');
-const Create = require('./create');
+const Weapon = require('./weapons');
+const Modification = require('./mod');
+const AddModel = require('./addModel');
+const AddWeapon = require('./addWeapon');
+const AddMod = require('./addMod');
 
 $(document).ready(function() {
 	console.log("hello nurse");
+	let player = function(name) {
+		this.name = name;
+		this.model = null;
+		this.weapon = null;
+		this.modification = null;
+	};
+
+	let player1 = new player();
+	let player2 = new player();
+
+	// Page load
 	$('.page-load').show();
 	$('#inputOne').focus();
+
+
+	player1.model = new Model.ModelOne();
+	console.log("player1", player1);
+	player1.weapon = new Weapon.weaponOne();
+	console.log("player1", player1);
+	player1.modification = new Modification.modOne();
+	console.log("player1", player1);
+	console.log("player1.model.damage", player1.model.damage);
 
 
 

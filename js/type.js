@@ -1,77 +1,36 @@
 "use strict";
 // Requirements should flow in a direction and not step on each other
-const Robot = require('./robot');
-
-let Type = function() {
-	this.typeName = null;
-};
-Type.prototype = new Robot();
+const RobotFile = require('./robot');
+console.log("RobotFile.Battledome", RobotFile.Battledome);
 // Need three type constructor functions
 // Game balancing - Building damage less to more with types
-Type.TypeOne = function() {
+let TypeOne = function() {
 	this.typeName = "type one";
 	this.health = Math.floor(Math.random() * 40 + 70);
-	this.damage = Math.floor(Math.random() * 10 + 5);
+	this.typeDamage = Math.floor(Math.random() * 10 + 5);
 	this.shield = 25;
   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?
 };
-Type.TypeOne.prototype = new Robot();
+// This is saying new RobotFile(file).Robot(object).Robot(constructor)
+TypeOne.prototype = new RobotFile.Battledome.Robot();
 
-Type.TypeTwo = function() {
+let TypeTwo = function() {
 	this.typeName = "type two";
 	this.health = Math.floor(Math.random() * 40 + 60);
-	this.damage = Math.floor(Math.random() * 10 + 10);
+	this.typeDamage = Math.floor(Math.random() * 10 + 10);
   this.shield = 25;
   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
 };
-Type.TypeTwo.prototype = new Robot();
+TypeTwo.prototype = new RobotFile.Battledome.Robot();
 
-Type.TypeThree = function() {
+let TypeThree = function() {
 	this.typeName = "type three";
 	this.health = Math.floor(Math.random() * 40 + 50);
-	this.damage = Math.floor(Math.random() * 10 + 15);
+	this.typeDamage = Math.floor(Math.random() * 10 + 15);
   this.shield = 25;
   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
 };
-Type.TypeThree.prototype = new Robot();
+TypeThree.prototype = new RobotFile.Battledome.Robot();
 
-module.exports = Type;
-
-
-// "use strict";
-// // Requirements should flow in a direction and not step on each other
-// const Robot = require('./robot');
-
-// let Type = {};
-// // Need three type constructor functions
-// // Game balancing - Building damage less to more with types
-// Type.TypeOne = function() {
-// 	this.type = "type one";
-// 	this.health = Math.floor(Math.random() * 40 + 70);
-// 	this.damage = Math.floor(Math.random() * 10 + 5);
-// 	this.shield = 25;
-//   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?
-// };
-// Type.TypeOne.prototype = new Robot();
-
-// Type.TypeTwo = function() {
-// 	this.type = "type two";
-// 	this.health = Math.floor(Math.random() * 40 + 60);
-// 	this.damage = Math.floor(Math.random() * 10 + 10);
-//   this.shield = 25;
-//   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
-// };
-// Type.TypeTwo.prototype = new Robot();
-
-// Type.TypeThree = function() {
-// 	this.type = "type three";
-// 	this.health = Math.floor(Math.random() * 40 + 50);
-// 	this.damage = Math.floor(Math.random() * 10 + 15);
-//   this.shield = 25;
-//   this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
-// };
-// Type.TypeThree.prototype = new Robot();
-
-// module.exports = Type;
-
-
+// This is exporting constructors
+module.exports = {TypeOne, TypeTwo, TypeThree};

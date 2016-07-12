@@ -1,9 +1,9 @@
 "use strict";
 // Defining base object for robot
-let Robot = {};
+let Battledome = {};
 
 // Defining a base robot
-Robot = function(name) {
+Battledome.Robot = function(name) {
 	this.playerName = name || "unknown robot";
 	this.type = null;
   this.health = 0;
@@ -12,4 +12,5 @@ Robot = function(name) {
   this.evade = 0;
 };
 
-module.exports = Robot;
+// Look in to always exporting objects.  This did not work without {}.
+module.exports = {Battledome};
