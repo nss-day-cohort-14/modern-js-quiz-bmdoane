@@ -5,7 +5,7 @@ const Weapon = require('./weapons');
 
 let AddWeapon = {};
 
-function addWeapon(element, player) {
+AddWeapon.addWeapon = function(element, player) {
 	switch(element.id) {
 		case "weapon-one":
 			player.weapon = new Weapon.weaponOne();
@@ -29,6 +29,6 @@ function addWeapon(element, player) {
 			console.log("This function is broken!");															
 	}
 	return player.weapon;
-}
+};
 
 module.exports = AddWeapon;

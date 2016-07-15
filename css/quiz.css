@@ -13,6 +13,10 @@ body {
 }
 
 /* Input Row */
+.playerEnter {
+	text-align: center;
+}
+
 #vs {
 	text-align: center;
 }
@@ -21,6 +25,11 @@ body {
 	border: 1px dotted blue;
 	border-radius: 5px;
 }
+
+/* Battleground */
+/*.hide {
+	display: hidden;
+}*/
 
 /* Select Row */
 .page-load {

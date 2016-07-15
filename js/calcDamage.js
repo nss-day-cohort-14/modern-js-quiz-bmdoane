@@ -1,9 +1,17 @@
 "use strict";
 
+var $ = require('jquery');
+const Robot = require('./robot');
+const Type = require('./type');
+const Model = require('./model');
+const Weapon = require('./weapons');
+const Modification = require('./mod');
 
+// Decipher whether you will use this or calcStats
 function calcDamage(attacker) {
 	let damage = 0;
-	console.log("attacker.model.damageBonus", attacker.model.damageBonus);
+	console.log("attacker.model.typeDamage", attacker.model.typeDamage);
+	console.log("attacker.model.damageBonus", attacker.model.damage);
 	console.log("attacker.weapon.damage", attacker.weapon.damage);
 	console.log("attacker.modification.damageBonus", attacker.modification.damageBonus);
 

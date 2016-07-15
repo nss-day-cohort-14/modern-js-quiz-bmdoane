@@ -5,7 +5,7 @@ const Modification = require('./mod');
 
 let AddMod = {};
 
-function addMod(element, player) {
+AddMod.addMod = function(element, player) {
 	switch(element.id) {
 		case "mod-one":
 			player.modification = new Modification.modOne();
@@ -29,6 +29,6 @@ function addMod(element, player) {
 			console.log("This function is broken!");															
 	}
 	return player.modification;
-}
+};
 
 module.exports = AddMod;

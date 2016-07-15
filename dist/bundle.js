@@ -6,7 +6,7 @@ const Modification = require('./mod');
 
 let AddMod = {};
 
-function addMod(element, player) {
+AddMod.addMod = function(element, player) {
 	switch(element.id) {
 		case "mod-one":
 			player.modification = new Modification.modOne();
@@ -30,7 +30,7 @@ function addMod(element, player) {
 			console.log("This function is broken!");															
 	}
 	return player.modification;
-}
+};
 
 module.exports = AddMod;
 },{"./mod":5}],2:[function(require,module,exports){
@@ -40,7 +40,7 @@ const Model = require('./model');
 
 let AddModel = {};
 
-function addModel(element, player) {
+AddModel.addModel = function(element, player) {
 	switch(element.id) {
 		case "one":
 			player.model = new Model.ModelOne();
@@ -64,7 +64,7 @@ function addModel(element, player) {
 			console.log("This function is broken!");
 	}
 	return player.model;
-}
+};
 
 module.exports = AddModel;
 },{"./model":6}],3:[function(require,module,exports){
@@ -75,7 +75,7 @@ const Weapon = require('./weapons');
 
 let AddWeapon = {};
 
-function addWeapon(element, player) {
+AddWeapon.addWeapon = function(element, player) {
 	switch(element.id) {
 		case "weapon-one":
 			player.weapon = new Weapon.weaponOne();
@@ -99,7 +99,7 @@ function addWeapon(element, player) {
 			console.log("This function is broken!");															
 	}
 	return player.weapon;
-}
+};
 
 module.exports = AddWeapon;
 },{"./weapons":9}],4:[function(require,module,exports){
@@ -117,8 +117,17 @@ const AddMod = require('./addMod');
 
 $(document).ready(function() {
 	console.log("hello nurse");
-	let player = function(name) {
-		this.name = name;
+
+	// Page load
+	// How can I hide these so they won't show at load
+	// $('mods-load').hide();
+	// $('.weapons-load').hide();
+	// $('.robots-load').hide();
+	$('.page-load').show();
+	$('#inputOne').focus();
+
+	let player = function() {
+		this.name = null;
 		this.model = null;
 		this.weapon = null;
 		this.modification = null;
@@ -127,18 +136,38 @@ $(document).ready(function() {
 	let player1 = new player();
 	let player2 = new player();
 
-	// Page load
-	$('.page-load').show();
-	$('#inputOne').focus();
+	$('#enter1').on('click', function() {
+		player1.name = $('#inputOne').val();
+		// $('.robots-load').removeClass('hide');
+	});
+
+	$('.robots-load').on('click', function(event) {
+		console.log("$this", $(this).children.id);
+		AddModel.addModel(event.target.closest('.btn'), player1);
+		console.log("player1rob", player1);
+		// $('.robots-load').addClass('hide');
+		// $('.weapons-load').removeClass('hide');
+	});
+
+	$('.weapons-load').on('click', function(event) {
+		AddWeapon.addWeapon(event.target.closest('.btn'), player1);
+		console.log("player1weap", player1);
+	});
+
+	$('.mods-load').on('click', function(event) {
+		AddMod.addMod(event.target.closest('.btn'), player1);
+		console.log("player1mod", player1);
+	});	
 
 
-	player1.model = new Model.ModelOne();
-	console.log("player1", player1);
-	player1.weapon = new Weapon.weaponOne();
-	console.log("player1", player1);
-	player1.modification = new Modification.modOne();
-	console.log("player1", player1);
-	console.log("player1.model.damage", player1.model.damage);
+
+	// player1.model = new Model.ModelOne();
+	// console.log("player1", player1);
+	// player1.weapon = new Weapon.weaponOne();
+	// console.log("player1", player1);
+	// player1.modification = new Modification.modOne();
+	// console.log("player1", player1);
+	// console.log("player1.model.damage", player1.model.damage);
 
 
 
@@ -196,14 +225,18 @@ let Modification = function() {
 Modification.modOne = function() {
 	this.name = "Shadow";
 	this.modType = "evasion";
-	this.damageBonus = 0;		
+	this.damageBonus = 0;
+	this.shieldBonus = 0;
+	this.evadeBonus = 10;		
 };
 Modification.modOne.prototype = new Modification();
 
 Modification.modTwo = function() {
 	this.name = "Sneaky";
 	this.modType = "evasion";
-	this.damageBonus = 0;		
+	this.damageBonus = 0;
+	this.shieldBonus = 0;
+	this.evadeBonus = 15;			
 };
 Modification.modTwo.prototype = new Modification();
 
@@ -211,14 +244,18 @@ Modification.modTwo.prototype = new Modification();
 Modification.modThree = function() {
 	this.name = "Double Fisted";
 	this.modType = "damage";
-	this.damageBonus = 15;		
+	this.damageBonus = 15;
+	this.shieldBonus = 0;
+	this.evadeBonus = 0;			
 };
 Modification.modThree.prototype = new Modification();
 
 Modification.modFour = function() {
 	this.name = "Hammer Stomp";
 	this.modType = "damage";
-	this.damageBonus = 8;			
+	this.damageBonus = 8;
+	this.shieldBonus = 0;
+	this.evadeBonus = 0;				
 };
 Modification.modFour.prototype = new Modification();
 
@@ -226,14 +263,18 @@ Modification.modFour.prototype = new Modification();
 Modification.modFive = function() {
 	this.name = "Force Shield";
 	this.modType = "protection";
-	this.damageBonus = 0;			
+	this.damageBonus = 0;
+	this.shieldBonus = 20;
+	this.evadeBonus = 0;				
 };
 Modification.modFive.prototype = new Modification();
 
 Modification.modSix = function() {
 	this.name = "Clones";
 	this.modType = "protection";
-	this.damageBonus = 0;			
+	this.damageBonus = 0;
+	this.shieldBonus = 12;
+	this.evadeBonus = 0;				
 };
 Modification.modSix.prototype = new Modification();
 
@@ -249,9 +290,10 @@ let ModelOne = function() {
 	this.image = "https://c7.staticflickr.com/8/7386/28210427046_feb79c8c62.jpg";
 	this.health = 20;
   this.damage = 0;
-  this.shieldBonus = 1;
-  this.evadeBonus = 0; // Factor chance just into type??
+  this.protection = 1;
+  this.evasion = 0; // Factor chance just into type??
 };
+// This is new Type(the file).TypeOne(the constructor)
 ModelOne.prototype = new Type.TypeOne();
 
 let ModelTwo = function() {
@@ -259,8 +301,8 @@ let ModelTwo = function() {
 	this.image = "https://c7.staticflickr.com/9/8806/28210427006_c32c96429a.jpg";
 	this.health = 15;
   this.damage = 2;
-  this.shieldBonus = 2;
-  this.evadeBonus = 0;
+  this.protection = 2;
+  this.evasion = 0;
 };
 ModelTwo.prototype = new Type.TypeOne();
 
@@ -269,8 +311,8 @@ let ModelThree = function() {
 	this.image = "https://c3.staticflickr.com/9/8579/28140200322_bdc5782582.jpg";
 	this.health = 15;
   this.damage = 4;
-  this.shieldBonus = 3;
-  this.evadeBonus = 0;
+  this.protection = 3;
+  this.evasion = 0;
 };
 ModelThree.prototype = new Type.TypeTwo();
 
@@ -279,8 +321,8 @@ let ModelFour = function() {
 	this.image = "https://c1.staticflickr.com/9/8682/28210426896_d36d679361.jpg";	
 	this.health = 10;
   this.damage = 6;
-  this.shieldBonus = 4;
-  this.evadeBonus = 0;
+  this.protection = 4;
+  this.evasion = 0;
 };
 ModelFour.prototype = new Type.TypeTwo();
 
@@ -289,8 +331,8 @@ let ModelFive = function() {
 	this.image = "https://c1.staticflickr.com/8/7506/28140200152_6b341998a0.jpg";	
 	this.health = 5;
   this.damage = 8;
-  this.shieldBonus = 5;
-  this.evadeBonus = 0;
+  this.protection = 5;
+  this.evasion = 0;
 };
 ModelFive.prototype = new Type.TypeThree();
 
@@ -299,12 +341,11 @@ let ModelSix = function() {
 	this.image = "https://c5.staticflickr.com/8/7629/28210426796_aa9cf2f4bd.jpg";	
 	this.health = 0;
   this.damage = 10;
-  this.shieldBonus = 6;
-  this.evadeBonus = 0;
+  this.protection = 6;
+  this.evasion = 0;
 };
 ModelSix.prototype = new Type.TypeThree();
 
-// Whats available to other files
 module.exports = {ModelOne, ModelTwo, ModelThree, ModelFour, ModelFive, ModelSix};
 
 
@@ -319,44 +360,45 @@ Battledome.Robot = function(name) {
 	this.type = null;
   this.health = 0;
   this.damage = 0;
-  this.shield = 0;
-  this.evade = 0;
+  this.protection = 0;
+  this.evasion = 0;
 };
 
+// Whats exported is available to other files
 // Look in to always exporting objects.  This did not work without {}.
 module.exports = {Battledome};
 },{}],8:[function(require,module,exports){
 "use strict";
 // Requirements should flow in a direction and not step on each other
 const RobotFile = require('./robot');
-console.log("RobotFile.Battledome", RobotFile.Battledome);
+
 // Need three type constructor functions
 // Game balancing - Building damage less to more with types
 let TypeOne = function() {
 	this.typeName = "type one";
-	this.health = Math.floor(Math.random() * 40 + 70);
+	this.typeHealth = Math.floor(Math.random() * 40 + 70);
 	this.typeDamage = Math.floor(Math.random() * 10 + 5);
-	this.shield = 25;
-  this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?
+	this.typeProtection = 25;
+  this.typeEvasion = Math.floor(Math.random() * 10 + 1); // Refactor?
 };
 // This is saying new RobotFile(file).Robot(object).Robot(constructor)
 TypeOne.prototype = new RobotFile.Battledome.Robot();
 
 let TypeTwo = function() {
 	this.typeName = "type two";
-	this.health = Math.floor(Math.random() * 40 + 60);
+	this.typeHealth = Math.floor(Math.random() * 40 + 60);
 	this.typeDamage = Math.floor(Math.random() * 10 + 10);
-  this.shield = 25;
-  this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
+  this.typeProtection = 25;
+  this.typeEvasion = Math.floor(Math.random() * 10 + 1); // Refactor?	
 };
 TypeTwo.prototype = new RobotFile.Battledome.Robot();
 
 let TypeThree = function() {
 	this.typeName = "type three";
-	this.health = Math.floor(Math.random() * 40 + 50);
+	this.typeHealth = Math.floor(Math.random() * 40 + 50);
 	this.typeDamage = Math.floor(Math.random() * 10 + 15);
-  this.shield = 25;
-  this.evade = Math.floor(Math.random() * 10 + 1); // Refactor?	
+  this.typeProtection = 25;
+  this.typeEvasion = Math.floor(Math.random() * 10 + 1); // Refactor?	
 };
 TypeThree.prototype = new RobotFile.Battledome.Robot();
 

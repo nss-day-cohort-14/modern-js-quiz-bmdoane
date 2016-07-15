@@ -4,7 +4,7 @@ const Model = require('./model');
 
 let AddModel = {};
 
-function addModel(element, player) {
+AddModel.addModel = function(element, player) {
 	switch(element.id) {
 		case "one":
 			player.model = new Model.ModelOne();
@@ -28,6 +28,6 @@ function addModel(element, player) {
 			console.log("This function is broken!");
 	}
 	return player.model;
-}
+};
 
 module.exports = AddModel;

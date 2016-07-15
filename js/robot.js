@@ -8,9 +8,10 @@ Battledome.Robot = function(name) {
 	this.type = null;
   this.health = 0;
   this.damage = 0;
-  this.shield = 0;
-  this.evade = 0;
+  this.protection = 0;
+  this.evasion = 0;
 };
 
+// Whats exported is available to other files
 // Look in to always exporting objects.  This did not work without {}.
 module.exports = {Battledome};

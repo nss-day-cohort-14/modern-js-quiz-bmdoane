@@ -12,8 +12,17 @@ const AddMod = require('./addMod');
 
 $(document).ready(function() {
 	console.log("hello nurse");
-	let player = function(name) {
-		this.name = name;
+
+	// Page load
+	// How can I hide these so they won't show at load
+	// $('mods-load').hide();
+	// $('.weapons-load').hide();
+	// $('.robots-load').hide();
+	$('.page-load').show();
+	$('#inputOne').focus();
+
+	let player = function() {
+		this.name = null;
 		this.model = null;
 		this.weapon = null;
 		this.modification = null;
@@ -22,18 +31,38 @@ $(document).ready(function() {
 	let player1 = new player();
 	let player2 = new player();
 
-	// Page load
-	$('.page-load').show();
-	$('#inputOne').focus();
+	$('#enter1').on('click', function() {
+		player1.name = $('#inputOne').val();
+		// $('.robots-load').removeClass('hide');
+	});
+
+	$('.robots-load').on('click', function(event) {
+		console.log("$this", $(this).children.id);
+		AddModel.addModel(event.target.closest('.btn'), player1);
+		console.log("player1rob", player1);
+		// $('.robots-load').addClass('hide');
+		// $('.weapons-load').removeClass('hide');
+	});
+
+	$('.weapons-load').on('click', function(event) {
+		AddWeapon.addWeapon(event.target.closest('.btn'), player1);
+		console.log("player1weap", player1);
+	});
+
+	$('.mods-load').on('click', function(event) {
+		AddMod.addMod(event.target.closest('.btn'), player1);
+		console.log("player1mod", player1);
+	});	
 
 
-	player1.model = new Model.ModelOne();
-	console.log("player1", player1);
-	player1.weapon = new Weapon.weaponOne();
-	console.log("player1", player1);
-	player1.modification = new Modification.modOne();
-	console.log("player1", player1);
-	console.log("player1.model.damage", player1.model.damage);
+
+	// player1.model = new Model.ModelOne();
+	// console.log("player1", player1);
+	// player1.weapon = new Weapon.weaponOne();
+	// console.log("player1", player1);
+	// player1.modification = new Modification.modOne();
+	// console.log("player1", player1);
+	// console.log("player1.model.damage", player1.model.damage);
 
 
 
