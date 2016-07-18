@@ -29,35 +29,55 @@ $(document).ready(function() {
 		this.modification = null;
 	};
 
+	let selectedPlayer = {};
 	let player1 = new player();
 	let player2 = new player();
 
+
+
 	$('#enter1').on('click', function() {
-		player1.name = $('#inputOne').val();
+		selectedPlayer.name = $('#inputOne').val();
+		// $('.robots-load').removeClass('hide');
+	});
+
+	$('#enter2').on('click', function() {
+		selectedPlayer.name = $('#inputTwo').val();
 		// $('.robots-load').removeClass('hide');
 	});
 
 	$('.robots').on('click', function(event) {
-		AddModel.addModel(event.target.closest('.robots'), player1);
-		console.log("player1rob", player1);
+		AddModel.addModel(event.target.closest('.robots'), selectedPlayer);
+		console.log("selectedPlayerrob", selectedPlayer);
 		// $('.robots-load').addClass('hide');
 		// $('.weapons-load').removeClass('hide');
 	});
 
 	$('.weapons').on('click', function(event) {
-		AddWeapon.addWeapon(event.target.closest('.weapons'), player1);
-		console.log("player1weap", player1);
+		AddWeapon.addWeapon(event.target.closest('.weapons'), selectedPlayer);
+		console.log("selectedPlayerweap", selectedPlayer);
 	});
 
 	$('.mods').on('click', function(event) {
-		AddMod.addMod(event.target.closest('.mods'), player1);
-		console.log("player1mod", player1);
+		AddMod.addMod(event.target.closest('.mods'), selectedPlayer);
+		console.log("selectedPlayermod", selectedPlayer);
 	});	
 
+	// Assign compiled stats to player1	
 	$('#create-2').on('click', function() {
-		Stats.calcStats(player1);
-		console.log("final player1", player1);
+		Stats.calcStats(selectedPlayer);
+		console.log("first selectedPlayer", selectedPlayer);
+		player1 = selectedPlayer;
+		console.log("player1", player1);
 		$('#inputTwo').focus();
+	});
+
+	// Assign compiled stats to player1	
+	$('#battle-go').on('click', function() {
+		Stats.calcStats(selectedPlayer);
+		console.log("second selectedPlayer", selectedPlayer);
+		player2 = selectedPlayer;
+		console.log("player2", player2);
+		// Show battleground
 	});
 
 
