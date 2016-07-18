@@ -33,7 +33,7 @@ AddMod.addMod = function(element, player) {
 };
 
 module.exports = AddMod;
-},{"./mod":5}],2:[function(require,module,exports){
+},{"./mod":6}],2:[function(require,module,exports){
 "use strict";
 
 const Model = require('./model');
@@ -41,6 +41,7 @@ const Model = require('./model');
 let AddModel = {};
 
 AddModel.addModel = function(element, player) {
+	
 	switch(element.id) {
 		case "one":
 			player.model = new Model.ModelOne();
@@ -66,8 +67,34 @@ AddModel.addModel = function(element, player) {
 	return player.model;
 };
 
+// AddModel.addModel = function() {
+// 	let robModel = $(this).children()[0].innerHTML;
+// 	switch(robModel) {
+// 		case "Robo-Model 1":
+// 			player1.model = new Model.ModelOne();
+// 			break;
+// 		case "Robo-Model 2":
+// 			player1.model = new Model.ModelTwo();
+// 			break;
+// 		case "Robo-Model 3":
+// 			player1.model = new Model.ModelThree();
+// 			break;
+// 		case "Robo-Model 4":
+// 			player1.model = new Model.ModelFour();
+// 			break;
+// 		case "Robo-Model 5":
+// 			player1.model = new Model.ModelFive();
+// 			break;
+// 		case "Robo-Model 6":
+// 			player1.model = new Model.ModelSix();
+// 			break;
+// 		default:
+// 			console.log("This function is broken!");
+// 	}
+// 	return player.model;
+// };
 module.exports = AddModel;
-},{"./model":6}],3:[function(require,module,exports){
+},{"./model":7}],3:[function(require,module,exports){
 "use strict";
 
 // Need this for it to work.  Why does it with no module export?
@@ -102,7 +129,30 @@ AddWeapon.addWeapon = function(element, player) {
 };
 
 module.exports = AddWeapon;
-},{"./weapons":9}],4:[function(require,module,exports){
+},{"./weapons":10}],4:[function(require,module,exports){
+"use strict";
+
+var $ = require('jquery');
+const Robot = require('./robot');
+const Type = require('./type');
+const Model = require('./model');
+const Weapon = require('./weapons');
+const Modification = require('./mod');
+
+let Stats = {};
+
+// Do I need damage here and in calcDmg
+Stats.calcStats = function(player) {
+	player.health = player.model.health + player.model.typeHealth;
+	player.damage = player.model.damage + player.model.typeDamage + player.modification.damageBonus + player.weapon.damage;
+	player.protection = player.model.protection + player.model.typeProtection;
+	player.evasion = player.model.evasion + player.model.typeEvasion;
+
+	return player; 
+};
+
+module.exports = Stats;
+},{"./mod":6,"./model":7,"./robot":8,"./type":9,"./weapons":10,"jquery":11}],5:[function(require,module,exports){
 "use strict";
 
 var $ = require('jquery');
@@ -114,6 +164,7 @@ const Modification = require('./mod');
 const AddModel = require('./addModel');
 const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
+const Stats = require('./calcStats.js');
 
 $(document).ready(function() {
 	console.log("hello nurse");
@@ -141,24 +192,28 @@ $(document).ready(function() {
 		// $('.robots-load').removeClass('hide');
 	});
 
-	$('.robots-load').on('click', function(event) {
-		console.log("$this", $(this).children.id);
-		AddModel.addModel(event.target.closest('.btn'), player1);
+	$('.robots').on('click', function(event) {
+		AddModel.addModel(event.target.closest('.robots'), player1);
 		console.log("player1rob", player1);
 		// $('.robots-load').addClass('hide');
 		// $('.weapons-load').removeClass('hide');
 	});
 
-	$('.weapons-load').on('click', function(event) {
-		AddWeapon.addWeapon(event.target.closest('.btn'), player1);
+	$('.weapons').on('click', function(event) {
+		AddWeapon.addWeapon(event.target.closest('.weapons'), player1);
 		console.log("player1weap", player1);
 	});
 
-	$('.mods-load').on('click', function(event) {
-		AddMod.addMod(event.target.closest('.btn'), player1);
+	$('.mods').on('click', function(event) {
+		AddMod.addMod(event.target.closest('.mods'), player1);
 		console.log("player1mod", player1);
 	});	
 
+	$('#create-2').on('click', function() {
+		Stats.calcStats(player1);
+		console.log("final player1", player1);
+		$('#inputTwo').focus();
+	});
 
 
 	// player1.model = new Model.ModelOne();
@@ -212,7 +267,7 @@ $(document).ready(function() {
 // Rounds continue until one of the robots has 0, or less than 0, health.
 // When the battle is over display the outcome to the user. For example...
 // The Viper Drone defeated the Behemoth ATV with its flamethrower.	
-},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./mod":5,"./model":6,"./robot":7,"./type":8,"./weapons":9,"jquery":10}],5:[function(require,module,exports){
+},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./calcStats.js":4,"./mod":6,"./model":7,"./robot":8,"./type":9,"./weapons":10,"jquery":11}],6:[function(require,module,exports){
 "use strict";
 
 // Modification constructor
@@ -279,7 +334,7 @@ Modification.modSix = function() {
 Modification.modSix.prototype = new Modification();
 
 module.exports = Modification;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 // This is a variable to the file.  Type.TypeOne would grab object.
@@ -349,7 +404,7 @@ ModelSix.prototype = new Type.TypeThree();
 module.exports = {ModelOne, ModelTwo, ModelThree, ModelFour, ModelFive, ModelSix};
 
 
-},{"./type":8}],7:[function(require,module,exports){
+},{"./type":9}],8:[function(require,module,exports){
 "use strict";
 // Defining base object for robot
 let Battledome = {};
@@ -367,7 +422,7 @@ Battledome.Robot = function(name) {
 // Whats exported is available to other files
 // Look in to always exporting objects.  This did not work without {}.
 module.exports = {Battledome};
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 // Requirements should flow in a direction and not step on each other
 const RobotFile = require('./robot');
@@ -405,7 +460,7 @@ TypeThree.prototype = new RobotFile.Battledome.Robot();
 // This is exporting constructors
 module.exports = {TypeOne, TypeTwo, TypeThree};
 
-},{"./robot":7}],9:[function(require,module,exports){
+},{"./robot":8}],10:[function(require,module,exports){
 "use strict";
 
 // Weapon constructor
@@ -453,7 +508,7 @@ Weapon.weaponSix.prototype = new Weapon();
 
 module.exports = Weapon;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
  * jQuery JavaScript Library v3.1.0
@@ -10529,7 +10584,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[4])
+},{}]},{},[5])
 
 
 //# sourceMappingURL=bundle.js.map

@@ -42,6 +42,10 @@ body {
  
 button {
 	margin: 20px;
+}
+
+.transition {
+	text-align: center;	
 } 
 
 /* Footer */

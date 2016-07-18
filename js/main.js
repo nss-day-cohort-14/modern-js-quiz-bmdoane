@@ -9,6 +9,7 @@ const Modification = require('./mod');
 const AddModel = require('./addModel');
 const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
+const Stats = require('./calcStats.js');
 
 $(document).ready(function() {
 	console.log("hello nurse");
@@ -36,24 +37,28 @@ $(document).ready(function() {
 		// $('.robots-load').removeClass('hide');
 	});
 
-	$('.robots-load').on('click', function(event) {
-		console.log("$this", $(this).children.id);
-		AddModel.addModel(event.target.closest('.btn'), player1);
+	$('.robots').on('click', function(event) {
+		AddModel.addModel(event.target.closest('.robots'), player1);
 		console.log("player1rob", player1);
 		// $('.robots-load').addClass('hide');
 		// $('.weapons-load').removeClass('hide');
 	});
 
-	$('.weapons-load').on('click', function(event) {
-		AddWeapon.addWeapon(event.target.closest('.btn'), player1);
+	$('.weapons').on('click', function(event) {
+		AddWeapon.addWeapon(event.target.closest('.weapons'), player1);
 		console.log("player1weap", player1);
 	});
 
-	$('.mods-load').on('click', function(event) {
-		AddMod.addMod(event.target.closest('.btn'), player1);
+	$('.mods').on('click', function(event) {
+		AddMod.addMod(event.target.closest('.mods'), player1);
 		console.log("player1mod", player1);
 	});	
 
+	$('#create-2').on('click', function() {
+		Stats.calcStats(player1);
+		console.log("final player1", player1);
+		$('#inputTwo').focus();
+	});
 
 
 	// player1.model = new Model.ModelOne();
