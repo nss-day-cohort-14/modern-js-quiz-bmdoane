@@ -33,7 +33,7 @@ AddMod.addMod = function(element, player) {
 };
 
 module.exports = AddMod;
-},{"./mod":7}],2:[function(require,module,exports){
+},{"./mod":8}],2:[function(require,module,exports){
 "use strict";
 
 const Model = require('./model');
@@ -94,7 +94,7 @@ AddModel.addModel = function(element, player) {
 // 	return player.model;
 // };
 module.exports = AddModel;
-},{"./model":8}],3:[function(require,module,exports){
+},{"./model":9}],3:[function(require,module,exports){
 "use strict";
 
 // Need this for it to work.  Why does it with no module export?
@@ -129,7 +129,56 @@ AddWeapon.addWeapon = function(element, player) {
 };
 
 module.exports = AddWeapon;
-},{"./weapons":11}],4:[function(require,module,exports){
+},{"./weapons":12}],4:[function(require,module,exports){
+"use strict";
+
+var $ = require('jquery');
+//const Calc = require('calcDamage.js');
+
+const Battle = {};
+
+let currentPlayer1 = {};
+let currentPlayer2 = {};
+let battleString = '';
+let playerDmg;
+// let startingPlayer1Health;
+// let startingPlayer2Health;
+Battle.counter = 0;
+
+// Battle.Attack = function(attacker, victim) {
+// 	playerDmg = Calc.calcDamage(attacker);
+// 	victim.health = victim.health - playerDmg;
+// };
+
+// Where Am I grabbing stats from??
+// Does calcStat work or do I need a buildPlayer func?
+Battleground.Initiate = function() {
+  currentPlayer1 = Selectors.currentPlayer;
+  currentPlayer2 = Selectors.currentOpponent;
+  // startingPlayerHealth = currentPlayer.health;
+  // startingOpponentHealth = currentOpponent.health;
+};
+
+Battle.Player1Card = function() {
+	console.log("ur mom");
+	let player1String = '';
+	player1String += `
+	<div class="pc1">
+		<p>${currentPlayer1.name}</p>
+	</div>`;
+};
+
+Battle.Player2Card = function() {
+	console.log("ur mom's mom");
+	let player2String = '';
+	player2String += `
+	<div class="pc2">
+		<p>${currentPlayer2.name}</p>
+	</div>`;
+};
+
+module.exports = Battle;
+},{"jquery":13}],5:[function(require,module,exports){
 "use strict";
 
 var $ = require('jquery');
@@ -153,7 +202,7 @@ function calcDamage(attacker) {
 }
 
 module.exports = {calcDamage};
-},{"./mod":7,"./model":8,"./robot":9,"./type":10,"./weapons":11,"jquery":12}],5:[function(require,module,exports){
+},{"./mod":8,"./model":9,"./robot":10,"./type":11,"./weapons":12,"jquery":13}],6:[function(require,module,exports){
 "use strict";
 
 var $ = require('jquery');
@@ -176,7 +225,7 @@ Stats.calcStats = function(player) {
 };
 
 module.exports = Stats;
-},{"./mod":7,"./model":8,"./robot":9,"./type":10,"./weapons":11,"jquery":12}],6:[function(require,module,exports){
+},{"./mod":8,"./model":9,"./robot":10,"./type":11,"./weapons":12,"jquery":13}],7:[function(require,module,exports){
 "use strict";
 
 var $ = require('jquery');
@@ -190,6 +239,7 @@ const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
 const Stats = require('./calcStats.js');
 const Calc = require('./calcDamage.js');
+const Battle = require('./battle.js');
 
 $(document).ready(function() {
 	console.log("hello nurse");
@@ -261,6 +311,9 @@ $(document).ready(function() {
 		console.log("player2", player2);
 		// Show battleground
 	});
+	$('#battle-go').on('click', Battle.Player1Card);
+	$('#battle-go').on('click', Battle.Player2Card);
+
 
 	$('#attack').on('click', function() {
 		let pl1Dmg = Calc.calcDamage(player1);
@@ -325,7 +378,7 @@ $(document).ready(function() {
 // Rounds continue until one of the robots has 0, or less than 0, health.
 // When the battle is over display the outcome to the user. For example...
 // The Viper Drone defeated the Behemoth ATV with its flamethrower.	
-},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./calcDamage.js":4,"./calcStats.js":5,"./mod":7,"./model":8,"./robot":9,"./type":10,"./weapons":11,"jquery":12}],7:[function(require,module,exports){
+},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./battle.js":4,"./calcDamage.js":5,"./calcStats.js":6,"./mod":8,"./model":9,"./robot":10,"./type":11,"./weapons":12,"jquery":13}],8:[function(require,module,exports){
 "use strict";
 
 // Modification constructor
@@ -392,7 +445,7 @@ Modification.modSix = function() {
 Modification.modSix.prototype = new Modification();
 
 module.exports = Modification;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 
 // This is a variable to the file.  Type.TypeOne would grab object.
@@ -462,7 +515,7 @@ ModelSix.prototype = new Type.TypeThree();
 module.exports = {ModelOne, ModelTwo, ModelThree, ModelFour, ModelFive, ModelSix};
 
 
-},{"./type":10}],9:[function(require,module,exports){
+},{"./type":11}],10:[function(require,module,exports){
 "use strict";
 // Defining base object for robot
 let Battledome = {};
@@ -480,7 +533,7 @@ Battledome.Robot = function(name) {
 // Whats exported is available to other files
 // Look in to always exporting objects.  This did not work without {}.
 module.exports = {Battledome};
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 // Requirements should flow in a direction and not step on each other
 const RobotFile = require('./robot');
@@ -518,7 +571,7 @@ TypeThree.prototype = new RobotFile.Battledome.Robot();
 // This is exporting constructors
 module.exports = {TypeOne, TypeTwo, TypeThree};
 
-},{"./robot":9}],11:[function(require,module,exports){
+},{"./robot":10}],12:[function(require,module,exports){
 "use strict";
 
 // Weapon constructor
@@ -566,7 +619,7 @@ Weapon.weaponSix.prototype = new Weapon();
 
 module.exports = Weapon;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
  * jQuery JavaScript Library v3.1.0
@@ -10642,7 +10695,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[6])
+},{}]},{},[7])
 
 
 //# sourceMappingURL=bundle.js.map

@@ -11,6 +11,7 @@ const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
 const Stats = require('./calcStats.js');
 const Calc = require('./calcDamage.js');
+const Battle = require('./battle.js');
 
 $(document).ready(function() {
 	console.log("hello nurse");
@@ -82,6 +83,9 @@ $(document).ready(function() {
 		console.log("player2", player2);
 		// Show battleground
 	});
+	$('#battle-go').on('click', Battle.Player1Card);
+	$('#battle-go').on('click', Battle.Player2Card);
+
 
 	$('#attack').on('click', function() {
 		let pl1Dmg = Calc.calcDamage(player1);
