@@ -152,13 +152,15 @@ Battle.counter = 0;
 
 // Where Am I grabbing stats from??
 // Does calcStat work or do I need a buildPlayer func?
-Battleground.Initiate = function() {
-  currentPlayer1 = Selectors.currentPlayer;
-  currentPlayer2 = Selectors.currentOpponent;
-  // startingPlayerHealth = currentPlayer.health;
-  // startingOpponentHealth = currentOpponent.health;
-};
+// Battleground.Initiate = function(player) {
+//   currentPlayer1 = player;
+//   currentPlayer2 = Selectors.currentOpponent;
+//   // startingPlayerHealth = currentPlayer.health;
+//   // startingOpponentHealth = currentOpponent.health;
+// };
 
+
+// Pass player in
 Battle.Player1Card = function() {
 	console.log("ur mom");
 	let player1String = '';
