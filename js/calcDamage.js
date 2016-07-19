@@ -19,3 +19,5 @@ function calcDamage(attacker) {
 
 	return damage;
 }
+
+module.exports = {calcDamage};

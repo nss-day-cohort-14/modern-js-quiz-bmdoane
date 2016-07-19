@@ -57,6 +57,7 @@
 					<h1>Welcome to Robot Battledome!</h1>
 					<p>Enter a name and choose your robot to do battle.</p>
 				</div>
+
 				
 				<div class="robots-load">
 					<h3>Choose your robot:</h3>				
@@ -84,6 +85,7 @@
 					</div> <!-- Robots row 2 -->
 				<div>
 
+
 				<div class="weapons-load">
 					<h3>Choose a weapon:</h3>
 					<div class="row">
@@ -109,6 +111,7 @@
 						</div>						
 					</div> <!-- Weapons row 2 -->
 				<div>
+
 
 				<div class="mods-load">
 					<h3>Choose a modification:</h3>
@@ -138,21 +141,47 @@
 						<div class="row">
 							<div class="col-md-12">
 								<button class="btn btn-default" id="create-2">Create Player 2</button>	
-							</div>						
-						</div>
-						<div class="row">
-							<div class="col-md-12">
 								<button class="btn btn-default" id="battle-go">Battle</button>	
 							</div>						
 						</div>
 					</div> <!-- Transition	 -->	
-				</div> <!--  Mods-load	 -->	
+				</div> <!--  Mods-load	 -->
+
+
 				<div class="battle">
-					<h3>Battle!!!</h3>
-				</div> <!--  Battle	 -->		
+					<div class="row">
+						<div class="col-md-12" id="header-bat">
+							<h3>Battle!!!</h3>
+						</div>
+					</div> <!-- Battle row 1 -->
+					<div class="row">
+						<div class="col-md-4 card">
+							<div id="player1-bat">
+							</div>
+						</div>
+						<div class="col-md-4 card">
+							<div id="bat-descrip">
+							</div>							
+						</div>
+						<div class="col-md-4 card">
+							<div id="player2-bat">
+							</div>							
+						</div>
+					</div> <!-- Battle row 2	 -->
+					<div class="row">
+						<div class="col-md-12">
+							<button class="btn btn-default" id="attack">Attack</button>	
+							<button class="btn btn-default" id="restart">Fight Again!</button>													
+						</div>
+					</div> <!-- Battle row 3 -->
+				</div> <!--  Battle	 -->
+
+
 			</div> <!-- battlefield -->
 		</div> <!-- battlefield-wrapper -->
-	</div> <!-- container fluid -->	
+	</div> <!-- container fluid -->
+
+
 	<footer class="footer navbar-fixed-bottom">
 	     <div class="container-fluid">
 	     	<p class="copy">Copyright <span class="glyphicon glyphicon-copyright-mark"></span> Robot Battledome all rights reserved.  2016</p>

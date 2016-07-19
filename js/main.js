@@ -10,6 +10,7 @@ const AddModel = require('./addModel');
 const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
 const Stats = require('./calcStats.js');
+const Calc = require('./calcDamage.js');
 
 $(document).ready(function() {
 	console.log("hello nurse");
@@ -29,9 +30,9 @@ $(document).ready(function() {
 		this.modification = null;
 	};
 
-	let selectedPlayer = {};
 	let player1 = new player();
 	let player2 = new player();
+	let selectedPlayer = {};
 
 
 
@@ -68,6 +69,8 @@ $(document).ready(function() {
 		console.log("first selectedPlayer", selectedPlayer);
 		player1 = selectedPlayer;
 		console.log("player1", player1);
+		selectedPlayer = {};
+		console.log("selectedPlayer", selectedPlayer);
 		$('#inputTwo').focus();
 	});
 
@@ -78,6 +81,17 @@ $(document).ready(function() {
 		player2 = selectedPlayer;
 		console.log("player2", player2);
 		// Show battleground
+	});
+
+	$('#attack').on('click', function() {
+		let pl1Dmg = Calc.calcDamage(player1);
+		let pl2Dmg = Calc.calcDamage(player2);
+		console.log("pl1Dmg", pl1Dmg);
+		console.log("pl2Dmg", pl2Dmg);
+		player2.health = player2.health - pl1Dmg;
+		player1.health = player1.health - pl2Dmg;
+		console.log("player1.health", player1.health);
+		console.log("player2.health", player2.health);
 	});
 
 

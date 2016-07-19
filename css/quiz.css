@@ -46,6 +46,12 @@ button {
 
 .transition {
 	text-align: center;	
+}
+
+.card {
+	border: 1px solid blue;
+	border-radius: 5px;
+	height: 200px;
 } 
 
 /* Footer */

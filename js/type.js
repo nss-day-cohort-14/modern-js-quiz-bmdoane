@@ -6,7 +6,7 @@ const RobotFile = require('./robot');
 // Game balancing - Building damage less to more with types
 let TypeOne = function() {
 	this.typeName = "type one";
-	this.typeHealth = Math.floor(Math.random() * 40 + 70);
+	this.typeHealth = Math.floor(Math.random() * 40 + 170);
 	this.typeDamage = Math.floor(Math.random() * 10 + 5);
 	this.typeProtection = 25;
   this.typeEvasion = Math.floor(Math.random() * 10 + 1); // Refactor?
@@ -16,7 +16,7 @@ TypeOne.prototype = new RobotFile.Battledome.Robot();
 
 let TypeTwo = function() {
 	this.typeName = "type two";
-	this.typeHealth = Math.floor(Math.random() * 40 + 60);
+	this.typeHealth = Math.floor(Math.random() * 40 + 160);
 	this.typeDamage = Math.floor(Math.random() * 10 + 10);
   this.typeProtection = 25;
   this.typeEvasion = Math.floor(Math.random() * 10 + 1); // Refactor?	
@@ -25,7 +25,7 @@ TypeTwo.prototype = new RobotFile.Battledome.Robot();
 
 let TypeThree = function() {
 	this.typeName = "type three";
-	this.typeHealth = Math.floor(Math.random() * 40 + 50);
+	this.typeHealth = Math.floor(Math.random() * 40 + 150);
 	this.typeDamage = Math.floor(Math.random() * 10 + 15);
   this.typeProtection = 25;
   this.typeEvasion = Math.floor(Math.random() * 10 + 1); // Refactor?	

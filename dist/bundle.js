@@ -33,7 +33,7 @@ AddMod.addMod = function(element, player) {
 };
 
 module.exports = AddMod;
-},{"./mod":6}],2:[function(require,module,exports){
+},{"./mod":7}],2:[function(require,module,exports){
 "use strict";
 
 const Model = require('./model');
@@ -94,7 +94,7 @@ AddModel.addModel = function(element, player) {
 // 	return player.model;
 // };
 module.exports = AddModel;
-},{"./model":7}],3:[function(require,module,exports){
+},{"./model":8}],3:[function(require,module,exports){
 "use strict";
 
 // Need this for it to work.  Why does it with no module export?
@@ -129,7 +129,31 @@ AddWeapon.addWeapon = function(element, player) {
 };
 
 module.exports = AddWeapon;
-},{"./weapons":10}],4:[function(require,module,exports){
+},{"./weapons":11}],4:[function(require,module,exports){
+"use strict";
+
+var $ = require('jquery');
+const Robot = require('./robot');
+const Type = require('./type');
+const Model = require('./model');
+const Weapon = require('./weapons');
+const Modification = require('./mod');
+
+// Decipher whether you will use this or calcStats
+function calcDamage(attacker) {
+	let damage = 0;
+	console.log("attacker.model.typeDamage", attacker.model.typeDamage);
+	console.log("attacker.model.damageBonus", attacker.model.damage);
+	console.log("attacker.weapon.damage", attacker.weapon.damage);
+	console.log("attacker.modification.damageBonus", attacker.modification.damageBonus);
+
+	damage = attacker.model.typeDamage + attacker.model.damage + attacker.weapon.damage + attacker.modification.damageBonus;
+
+	return damage;
+}
+
+module.exports = {calcDamage};
+},{"./mod":7,"./model":8,"./robot":9,"./type":10,"./weapons":11,"jquery":12}],5:[function(require,module,exports){
 "use strict";
 
 var $ = require('jquery');
@@ -152,7 +176,7 @@ Stats.calcStats = function(player) {
 };
 
 module.exports = Stats;
-},{"./mod":6,"./model":7,"./robot":8,"./type":9,"./weapons":10,"jquery":11}],5:[function(require,module,exports){
+},{"./mod":7,"./model":8,"./robot":9,"./type":10,"./weapons":11,"jquery":12}],6:[function(require,module,exports){
 "use strict";
 
 var $ = require('jquery');
@@ -165,6 +189,7 @@ const AddModel = require('./addModel');
 const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
 const Stats = require('./calcStats.js');
+const Calc = require('./calcDamage.js');
 
 $(document).ready(function() {
 	console.log("hello nurse");
@@ -184,9 +209,9 @@ $(document).ready(function() {
 		this.modification = null;
 	};
 
-	let selectedPlayer = {};
 	let player1 = new player();
 	let player2 = new player();
+	let selectedPlayer = {};
 
 
 
@@ -223,6 +248,8 @@ $(document).ready(function() {
 		console.log("first selectedPlayer", selectedPlayer);
 		player1 = selectedPlayer;
 		console.log("player1", player1);
+		selectedPlayer = {};
+		console.log("selectedPlayer", selectedPlayer);
 		$('#inputTwo').focus();
 	});
 
@@ -233,6 +260,17 @@ $(document).ready(function() {
 		player2 = selectedPlayer;
 		console.log("player2", player2);
 		// Show battleground
+	});
+
+	$('#attack').on('click', function() {
+		let pl1Dmg = Calc.calcDamage(player1);
+		let pl2Dmg = Calc.calcDamage(player2);
+		console.log("pl1Dmg", pl1Dmg);
+		console.log("pl2Dmg", pl2Dmg);
+		player2.health = player2.health - pl1Dmg;
+		player1.health = player1.health - pl2Dmg;
+		console.log("player1.health", player1.health);
+		console.log("player2.health", player2.health);
 	});
 
 
@@ -287,7 +325,7 @@ $(document).ready(function() {
 // Rounds continue until one of the robots has 0, or less than 0, health.
 // When the battle is over display the outcome to the user. For example...
 // The Viper Drone defeated the Behemoth ATV with its flamethrower.	
-},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./calcStats.js":4,"./mod":6,"./model":7,"./robot":8,"./type":9,"./weapons":10,"jquery":11}],6:[function(require,module,exports){
+},{"./addMod":1,"./addModel":2,"./addWeapon":3,"./calcDamage.js":4,"./calcStats.js":5,"./mod":7,"./model":8,"./robot":9,"./type":10,"./weapons":11,"jquery":12}],7:[function(require,module,exports){
 "use strict";
 
 // Modification constructor
@@ -354,7 +392,7 @@ Modification.modSix = function() {
 Modification.modSix.prototype = new Modification();
 
 module.exports = Modification;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 // This is a variable to the file.  Type.TypeOne would grab object.
@@ -424,7 +462,7 @@ ModelSix.prototype = new Type.TypeThree();
 module.exports = {ModelOne, ModelTwo, ModelThree, ModelFour, ModelFive, ModelSix};
 
 
-},{"./type":9}],8:[function(require,module,exports){
+},{"./type":10}],9:[function(require,module,exports){
 "use strict";
 // Defining base object for robot
 let Battledome = {};
@@ -442,7 +480,7 @@ Battledome.Robot = function(name) {
 // Whats exported is available to other files
 // Look in to always exporting objects.  This did not work without {}.
 module.exports = {Battledome};
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 // Requirements should flow in a direction and not step on each other
 const RobotFile = require('./robot');
@@ -451,7 +489,7 @@ const RobotFile = require('./robot');
 // Game balancing - Building damage less to more with types
 let TypeOne = function() {
 	this.typeName = "type one";
-	this.typeHealth = Math.floor(Math.random() * 40 + 70);
+	this.typeHealth = Math.floor(Math.random() * 40 + 170);
 	this.typeDamage = Math.floor(Math.random() * 10 + 5);
 	this.typeProtection = 25;
   this.typeEvasion = Math.floor(Math.random() * 10 + 1); // Refactor?
@@ -461,7 +499,7 @@ TypeOne.prototype = new RobotFile.Battledome.Robot();
 
 let TypeTwo = function() {
 	this.typeName = "type two";
-	this.typeHealth = Math.floor(Math.random() * 40 + 60);
+	this.typeHealth = Math.floor(Math.random() * 40 + 160);
 	this.typeDamage = Math.floor(Math.random() * 10 + 10);
   this.typeProtection = 25;
   this.typeEvasion = Math.floor(Math.random() * 10 + 1); // Refactor?	
@@ -470,7 +508,7 @@ TypeTwo.prototype = new RobotFile.Battledome.Robot();
 
 let TypeThree = function() {
 	this.typeName = "type three";
-	this.typeHealth = Math.floor(Math.random() * 40 + 50);
+	this.typeHealth = Math.floor(Math.random() * 40 + 150);
 	this.typeDamage = Math.floor(Math.random() * 10 + 15);
   this.typeProtection = 25;
   this.typeEvasion = Math.floor(Math.random() * 10 + 1); // Refactor?	
@@ -480,7 +518,7 @@ TypeThree.prototype = new RobotFile.Battledome.Robot();
 // This is exporting constructors
 module.exports = {TypeOne, TypeTwo, TypeThree};
 
-},{"./robot":8}],10:[function(require,module,exports){
+},{"./robot":9}],11:[function(require,module,exports){
 "use strict";
 
 // Weapon constructor
@@ -528,7 +566,7 @@ Weapon.weaponSix.prototype = new Weapon();
 
 module.exports = Weapon;
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*eslint-disable no-unused-vars*/
 /*!
  * jQuery JavaScript Library v3.1.0
@@ -10604,7 +10642,7 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[5])
+},{}]},{},[6])
 
 
 //# sourceMappingURL=bundle.js.map
