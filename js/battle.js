@@ -29,22 +29,24 @@ Battle.counter = 0;
 
 
 // Pass player in
-Battle.Player1Card = function() {
+Battle.Player1Card = function(player) {
 	console.log("ur mom");
 	let player1String = '';
 	player1String += `
 	<div class="pc1">
-		<p>${currentPlayer1.name}</p>
+		<p>${player.name}</p>
 	</div>`;
+	$('#player1-bat').html(player1String);
 };
 
-Battle.Player2Card = function() {
+Battle.Player2Card = function(player) {
 	console.log("ur mom's mom");
 	let player2String = '';
 	player2String += `
 	<div class="pc2">
-		<p>${currentPlayer2.name}</p>
+		<p>${player.name}</p>
 	</div>`;
+	$('#player2-bat').html(player2String);	
 };
 
 module.exports = Battle;

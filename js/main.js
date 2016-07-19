@@ -81,11 +81,10 @@ $(document).ready(function() {
 		console.log("second selectedPlayer", selectedPlayer);
 		player2 = selectedPlayer;
 		console.log("player2", player2);
-		// Show battleground
+		// Initiating DOM PlayerCards
+		Battle.Player1Card(player1);
+		Battle.Player2Card(player2);
 	});
-	$('#battle-go').on('click', Battle.Player1Card);
-	$('#battle-go').on('click', Battle.Player2Card);
-
 
 	$('#attack').on('click', function() {
 		let pl1Dmg = Calc.calcDamage(player1);
