@@ -139,46 +139,45 @@ const Battle = {};
 
 let currentPlayer1 = {};
 let currentPlayer2 = {};
-let battleString = '';
-let playerDmg;
-// let startingPlayer1Health;
-// let startingPlayer2Health;
+
 Battle.counter = 0;
 
-// Battle.Attack = function(attacker, victim) {
-// 	playerDmg = Calc.calcDamage(attacker);
-// 	victim.health = victim.health - playerDmg;
-// };
-
-// Where Am I grabbing stats from??
-// Does calcStat work or do I need a buildPlayer func?
-// Battleground.Initiate = function(player) {
-//   currentPlayer1 = player;
-//   currentPlayer2 = Selectors.currentOpponent;
-//   // startingPlayerHealth = currentPlayer.health;
-//   // startingOpponentHealth = currentOpponent.health;
-// };
-
-
-// Pass player in
-Battle.Player1Card = function(player) {
+Battle.Player1Card = (player) => {
 	console.log("ur mom");
 	let player1String = '';
 	player1String += `
 	<div class="pc1">
 		<p>${player.name}</p>
+		<p>Operating Model ${player.model.modelName}</p>
+		<p>Weapon of choice:</p>
+		<p>${player.weapon.name}</p>
+		<p>Health: ${player.health}</p>
 	</div>`;
 	$('#player1-bat').html(player1String);
 };
 
-Battle.Player2Card = function(player) {
+Battle.Player2Card = (player) => {
 	console.log("ur mom's mom");
 	let player2String = '';
 	player2String += `
 	<div class="pc2">
 		<p>${player.name}</p>
+		<p>Operating Model ${player.model.modelName}</p>
+		<p>Weapon of choice:</p>
+		<p>${player.weapon.name}</p>
+		<p>Health: ${player.health}</p>		
 	</div>`;
 	$('#player2-bat').html(player2String);	
+};
+
+Battle.BuildDOM = () => {
+	console.log("Trebek's mom");
+	let battleString = '';
+	battleString += `
+	<div class="battle-dom">
+		Trebek's mom
+	</div>`
+	$('#bat-descrip').html(battleString);
 };
 
 module.exports = Battle;
@@ -192,8 +191,9 @@ const Model = require('./model');
 const Weapon = require('./weapons');
 const Modification = require('./mod');
 
+let Calc = {};
 // Decipher whether you will use this or calcStats
-function calcDamage(attacker) {
+Calc.calcDamage = function(attacker) {
 	let damage = 0;
 	console.log("attacker.model.typeDamage", attacker.model.typeDamage);
 	console.log("attacker.model.damageBonus", attacker.model.damage);
@@ -205,7 +205,7 @@ function calcDamage(attacker) {
 	return damage;
 }
 
-module.exports = {calcDamage};
+module.exports = Calc;
 },{"./mod":8,"./model":9,"./robot":10,"./type":11,"./weapons":12,"jquery":13}],6:[function(require,module,exports){
 "use strict";
 
@@ -268,7 +268,6 @@ $(document).ready(function() {
 	let selectedPlayer = {};
 
 
-
 	$('#enter1').on('click', function() {
 		selectedPlayer.name = $('#inputOne').val();
 		// $('.robots-load').removeClass('hide');
@@ -307,7 +306,7 @@ $(document).ready(function() {
 		$('#inputTwo').focus();
 	});
 
-	// Assign compiled stats to player1	
+	// Assign compiled stats to player2	
 	$('#battle-go').on('click', function() {
 		Stats.calcStats(selectedPlayer);
 		console.log("second selectedPlayer", selectedPlayer);
@@ -316,6 +315,7 @@ $(document).ready(function() {
 		// Initiating DOM PlayerCards
 		Battle.Player1Card(player1);
 		Battle.Player2Card(player2);
+		$('#bat-descrip').html('VS.');
 	});
 
 	$('#attack').on('click', function() {
@@ -325,57 +325,27 @@ $(document).ready(function() {
 		console.log("pl2Dmg", pl2Dmg);
 		player2.health = player2.health - pl1Dmg;
 		player1.health = player1.health - pl2Dmg;
+		Battle.Player1Card(player1);
+		Battle.Player2Card(player2);
+		Battle.BuildDOM();
 		console.log("player1.health", player1.health);
 		console.log("player2.health", player2.health);
 	});
 
+	// $('#restart').on('click', function() {
 
-	// player1.model = new Model.ModelOne();
-	// console.log("player1", player1);
-	// player1.weapon = new Weapon.weaponOne();
-	// console.log("player1", player1);
-	// player1.modification = new Modification.modOne();
-	// console.log("player1", player1);
-	// console.log("player1.model.damage", player1.model.damage);
-
-
+	// });
 
 });
 
 // Base Logical Requirements
 
-// Define three robot type functions (e.g. Drone, Bipedal, ATV).
-// Define at least 2 specific robot model functions for each type.
-// Give each robot model a different range of health. For example, one model can have health range of 50-80, and another one will have a range of 60-120. To accomplish this, read about the Math.random() function in JavaScript.
-// Give each robot model a different range of damage they do using the same technique.
-
-// Base Functional Requirements
-
-// You must also provide a select element underneath each text input so that the user can select one of the 6 robot models you defined.
-// Provide a Attack! button that, when clicked, simply applies the damage output of each robot against the other one.
 // Once either robot's health is <0 display a message that the battle is over, and which one won. For example...
 // The Viper Drone defeated the Behemoth ATV with its flamethrower.
 
-// Bonus Goals
 
 // Bonus Logical Requirements
 
-// These are completely optional, once you have the basic requirements met and want to practice object composition.
-
-// Define at least six different modifications and six different weapons that can be added to a robot.
-// Each modification should provide some combination of the following benefits - increased protection, increased damage, or evasion capability (ability to avoid some attacks).
-// Define the range of damage that each weapon can do.
-// Bonus Functional Requirements
-
-// If you have completed the base requirements, and want to explore object composition more, you may choose to implement these requirements. They are completely optional.
-
-// When your user interface first loads, provide the user with buttons so that one specific robot model can be chosen as Player 1.
-// Once the user selects a robot model for Player 1, show a button for each weapon that can be added to the robot.
-// Once the user selects a weapon for Player 1, show a button for each modification that can be added to the robot.
-// Once Player 1 has a modification, provide the user with buttons so that one specific robot model can be chosen as Player 2.
-// Once the user selects a robot model for Player 2, show a button for each weapon that can be added to the robot.
-// Once the user selects a weapon for Player 2, show a button for each modification that can be added to the robot.
-// Once the modification for Player 2 is chosen, the battle begins.
 // Each round of battle should determine the amount of damage each robot will do with its weapon.
 // That damage should then be adjusted based on the modifications that it has, and what its opponent has.
 // Rounds continue until one of the robots has 0, or less than 0, health.

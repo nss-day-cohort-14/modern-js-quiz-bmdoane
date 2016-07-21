@@ -7,46 +7,45 @@ const Battle = {};
 
 let currentPlayer1 = {};
 let currentPlayer2 = {};
-let battleString = '';
-let playerDmg;
-// let startingPlayer1Health;
-// let startingPlayer2Health;
+
 Battle.counter = 0;
 
-// Battle.Attack = function(attacker, victim) {
-// 	playerDmg = Calc.calcDamage(attacker);
-// 	victim.health = victim.health - playerDmg;
-// };
-
-// Where Am I grabbing stats from??
-// Does calcStat work or do I need a buildPlayer func?
-// Battleground.Initiate = function(player) {
-//   currentPlayer1 = player;
-//   currentPlayer2 = Selectors.currentOpponent;
-//   // startingPlayerHealth = currentPlayer.health;
-//   // startingOpponentHealth = currentOpponent.health;
-// };
-
-
-// Pass player in
-Battle.Player1Card = function(player) {
+Battle.Player1Card = (player) => {
 	console.log("ur mom");
 	let player1String = '';
 	player1String += `
 	<div class="pc1">
 		<p>${player.name}</p>
+		<p>Operating Model ${player.model.modelName}</p>
+		<p>Weapon of choice:</p>
+		<p>${player.weapon.name}</p>
+		<p>Health: ${player.health}</p>
 	</div>`;
 	$('#player1-bat').html(player1String);
 };
 
-Battle.Player2Card = function(player) {
+Battle.Player2Card = (player) => {
 	console.log("ur mom's mom");
 	let player2String = '';
 	player2String += `
 	<div class="pc2">
 		<p>${player.name}</p>
+		<p>Operating Model ${player.model.modelName}</p>
+		<p>Weapon of choice:</p>
+		<p>${player.weapon.name}</p>
+		<p>Health: ${player.health}</p>		
 	</div>`;
 	$('#player2-bat').html(player2String);	
+};
+
+Battle.BuildDOM = () => {
+	console.log("Trebek's mom");
+	let battleString = '';
+	battleString += `
+	<div class="battle-dom">
+		Trebek's mom
+	</div>`
+	$('#bat-descrip').html(battleString);
 };
 
 module.exports = Battle;
