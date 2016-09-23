@@ -129,4 +129,4 @@ gulp.task('watch', function() {
 });
 
 // This task runs when you type `gulp` in the CLI
-gulp.task('default', ['lint', /*'specs',*/ 'watch'], bundle);
+gulp.task('default', ['lint'/*, 'specs'*/, 'watch'], bundle);
