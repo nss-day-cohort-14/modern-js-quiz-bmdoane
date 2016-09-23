@@ -14,10 +14,9 @@ const Calc = require('./calcDamage.js');
 const Battle = require('./battle.js');
 const {coinFlip} = require('./coinFlip.js');
 
-console.log('filp', coinFlip())
 
 $(document).ready(function() {
-	console.log("hello nurse");
+	//console.log("hello nurse");
 
 	// Page load
 	// How can I hide these so they won't show at load
@@ -51,36 +50,36 @@ $(document).ready(function() {
 
 	$('.robots').on('click', function(event) {
 		AddModel.addModel(event.target.closest('.robots'), selectedPlayer);
-		console.log("selectedPlayerrob", selectedPlayer);
+		//console.log("selectedPlayerrob", selectedPlayer);
 		// $('.robots-load').addClass('hide');
 		// $('.weapons-load').removeClass('hide');
 	});
 
 	$('.weapons').on('click', function(event) {
 		AddWeapon.addWeapon(event.target.closest('.weapons'), selectedPlayer);
-		console.log("selectedPlayerweap", selectedPlayer);
+		//console.log("selectedPlayerweap", selectedPlayer);
 	});
 
 	$('.mods').on('click', function(event) {
 		AddMod.addMod(event.target.closest('.mods'), selectedPlayer);
-		console.log("selectedPlayermod", selectedPlayer);
+		//console.log("selectedPlayermod", selectedPlayer);
 	});	
 
 	// Assign compiled stats to player1	
 	$('#create-2').on('click', function() {
 		Stats.calcStats(selectedPlayer);
-		console.log("first selectedPlayer", selectedPlayer);
+		//console.log("first selectedPlayer", selectedPlayer);
 		player1 = selectedPlayer;
 		console.log("player1", player1);
 		selectedPlayer = {};
-		console.log("selectedPlayer", selectedPlayer);
+		//console.log("selectedPlayer", selectedPlayer);
 		$('#inputTwo').focus();
 	});
 
 	// Assign compiled stats to player2	
 	$('#battle-go').on('click', function() {
 		Stats.calcStats(selectedPlayer);
-		console.log("second selectedPlayer", selectedPlayer);
+		//console.log("second selectedPlayer", selectedPlayer);
 		player2 = selectedPlayer;
 		console.log("player2", player2);
 
