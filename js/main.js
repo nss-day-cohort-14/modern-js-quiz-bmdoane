@@ -12,6 +12,9 @@ const AddMod = require('./addMod');
 const Stats = require('./calcStats.js');
 const Calc = require('./calcDamage.js');
 const Battle = require('./battle.js');
+const {coinFlip} = require('./coinFlip.js');
+
+console.log('filp', coinFlip())
 
 $(document).ready(function() {
 	console.log("hello nurse");
@@ -80,6 +83,7 @@ $(document).ready(function() {
 		console.log("second selectedPlayer", selectedPlayer);
 		player2 = selectedPlayer;
 		console.log("player2", player2);
+
 		// Initiating DOM PlayerCards
 		Battle.Player1Card(player1);
 		Battle.Player2Card(player2);
@@ -87,6 +91,11 @@ $(document).ready(function() {
 	});
 
 	$('#attack').on('click', function() {
+		if (coinFlip() === 0) {
+			console.log("Player one is first")
+		} else {
+			console.log("Player 2 is first")
+		}
 		let pl1Dmg = Calc.calcDamage(player1);
 		let pl2Dmg = Calc.calcDamage(player2);
 		console.log("pl1Dmg", pl1Dmg);
