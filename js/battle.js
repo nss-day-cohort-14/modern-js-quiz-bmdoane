@@ -32,7 +32,7 @@ Battle.Player2Card = (player) => {
 		<p>${player.name}</p>
 		<p>Operating Model ${player.model.modelName}</p>
 		<p>Weapon of choice:</p>
-		<p>${player.weapon.name}</p>
+		<p>${player.weapon.name}</p>		
 		<p>Health: ${player.health}</p>		
 	</div>`;
 	$('#player2-bat').html(player2String);	
