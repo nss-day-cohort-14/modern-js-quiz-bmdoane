@@ -13,6 +13,7 @@ const Stats = require('./calcStats.js');
 const Calc = require('./calcDamage.js');
 const Battle = require('./battle.js');
 const {coinFlip} = require('./coinFlip.js');
+const {newBattle} = require('./reset.js');
 
 
 $(document).ready(function() {
@@ -150,24 +151,7 @@ $(document).ready(function() {
 		}
 	});
 
-	// 	$('#attack').on('click', function() {
-	// 	if (coinFlip() === 0) {
-	// 		console.log("Player one is first")
-	// 	} else {
-	// 		console.log("Player 2 is first")
-	// 	}
-	// 	let pl1Dmg = Calc.calcDamage(player1);
-	// 	let pl2Dmg = Calc.calcDamage(player2);
-	// 	console.log("pl1Dmg", pl1Dmg);
-	// 	console.log("pl2Dmg", pl2Dmg);
-	// 	player2.health = player2.health - pl1Dmg;
-	// 	player1.health = player1.health - pl2Dmg;
-	// 	Battle.Player1Card(player1);
-	// 	Battle.Player2Card(player2);
-	// 	Battle.BuildDOM();
-	// 	console.log("player1.health", player1.health);
-	// 	console.log("player2.health", player2.health);
-	// });
+	$('#restart').click(newBattle)
 
 	// $('#restart').on('click', function() {
 
