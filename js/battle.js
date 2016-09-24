@@ -38,14 +38,33 @@ Battle.Player2Card = (player) => {
 	$('#player2-bat').html(player2String);	
 };
 
-Battle.BuildDOM = () => {
-	console.log("Trebek's mom");
+// Battle.BuildDOM = () => {
+// 	console.log("Trebek's mom");
+// 	let battleString = '';
+// 	battleString += `
+// 	<div class="battle-dom">
+// 		Trebek's mom
+// 	</div>`
+// 	$('#bat-descrip').html(battleString);
+// };
+
+Battle.BuildDOM = (attacker, victim) => {
+	//console.log("attacker", attacker);
 	let battleString = '';
 	battleString += `
 	<div class="battle-dom">
-		Trebek's mom
+		<p>${attacker.name} strikes ${victim.name} for ${attacker.damage}<p> 
 	</div>`
 	$('#bat-descrip').html(battleString);
 };
+
+Battle.EndDOM = (winner, loser) => {
+	let endString = '';
+	endString = `
+	<div class="battle-dom">
+		<p>${winner.name} has vanquished ${loser.name}</p>
+	</div>`
+	$('#bat-descrip').html(endString);
+}
 
 module.exports = Battle;
