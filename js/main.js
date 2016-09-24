@@ -25,6 +25,8 @@ $(document).ready(function() {
 	// $('.robots-load').hide();
 	$('.page-load').show();
 	$('#inputOne').focus();
+	$('#attack').show()
+	$('#restart').hide()
 
 	let player = function() {
 		this.name = null;
@@ -99,12 +101,18 @@ $(document).ready(function() {
 			player2.health = player2.health - pl1Dmg;
 			player1.health = player1.health - pl2Dmg;
 			if (player2.health <= 0) {
+				player2.health = 0
+				Battle.Player1Card(player1);
+				Battle.Player2Card(player2);
 				Battle.EndDOM(player1, player2)
 				//show results of 0 health for player 2
 				//whatever else it takes to end battle
 			} else if (player1.health <= 0) {
+				player1.health = 0
+				Battle.Player1Card(player1);
+				Battle.Player2Card(player2);				
 				Battle.EndDOM(player2, player1)
-				//show results of 0 health for player 1
+				//show results of 0 health for player 2
 				//whatever else it takes to end battle
 			} else {
 				console.log("player2.health", player2.health);
@@ -119,10 +127,16 @@ $(document).ready(function() {
 			player1.health = player1.health - pl2Dmg;			
 			player2.health = player2.health - pl1Dmg;
 			if (player1.health <= 0) {
+				player1.health = 0
+				Battle.Player1Card(player1);
+				Battle.Player2Card(player2);
 				Battle.EndDOM(player2, player1)
 				//show results of 0 health for player 2
 				//whatever else it takes to end battle
 			} else if (player2.health <= 0) {
+				player2.health = 0
+				Battle.Player1Card(player1);
+				Battle.Player2Card(player2);				
 				Battle.EndDOM(player1, player2)
 				//show results of 0 health for player 2
 				//whatever else it takes to end battle

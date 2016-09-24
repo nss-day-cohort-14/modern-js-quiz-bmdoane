@@ -53,9 +53,10 @@ Battle.BuildDOM = (attacker, victim) => {
 	let battleString = '';
 	battleString += `
 	<div class="battle-dom">
-		<p>${attacker.name} strikes ${victim.name} for ${attacker.damage}<p> 
+		<p>${attacker.name} strikes ${victim.name} for ${attacker.damage}<p>
+		<p>${victim.name} retaliates for ${victim.damage}</p> 
 	</div>`
-	$('#bat-descrip').html(battleString);
+	$('#bat-descrip').prepend(battleString);
 };
 
 Battle.EndDOM = (winner, loser) => {
@@ -65,6 +66,8 @@ Battle.EndDOM = (winner, loser) => {
 		<p>${winner.name} has vanquished ${loser.name}</p>
 	</div>`
 	$('#bat-descrip').html(endString);
+	$('#attack').hide()
+	$('#restart').show()
 }
 
 module.exports = Battle;
