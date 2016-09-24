@@ -153,10 +153,6 @@ $(document).ready(function() {
 
 	$('#restart').click(newBattle)
 
-	// $('#restart').on('click', function() {
-
-	// });
-
 });
 
 // Base Logical Requirements
