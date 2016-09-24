@@ -15,7 +15,9 @@ Battle.Player1Card = (player) => {
 	let player1String = '';
 	player1String += `
 	<div class="pc1">
-		<p>${player.name}</p>
+		<div class="card-header">
+			<p>${player.name}</p>
+		</div>
 		<p>Operating Model ${player.model.modelName}</p>
 		<p>Weapon of choice:</p>
 		<p>${player.weapon.name}</p>
@@ -29,7 +31,9 @@ Battle.Player2Card = (player) => {
 	let player2String = '';
 	player2String += `
 	<div class="pc2">
-		<p>${player.name}</p>
+		<div class="card-header">
+			<p>${player.name}</p>
+		</div>
 		<p>Operating Model ${player.model.modelName}</p>
 		<p>Weapon of choice:</p>
 		<p>${player.weapon.name}</p>
