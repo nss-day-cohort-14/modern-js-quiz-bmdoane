@@ -89,7 +89,7 @@ $(document).ready(function() {
 		// Initiating DOM PlayerCards
 		Battle.Player1Card(player1);
 		Battle.Player2Card(player2);
-		$('#bat-descrip').html('VS.');
+		//$('#bat-descrip').html('VS.');
 	});
 
 	$('#attack').on('click', function() {
