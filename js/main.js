@@ -9,7 +9,7 @@ const Modification = require('./mod');
 const AddModel = require('./addModel');
 const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
-const Stats = require('./calcStats.js');
+const {calcStats} = require('./calcStats.js');
 const Calc = require('./calcDamage.js');
 const Battle = require('./battle.js');
 const {coinFlip} = require('./coinFlip.js');
@@ -17,8 +17,6 @@ const {newBattle} = require('./reset.js');
 
 
 $(document).ready(function() {
-	//console.log("hello nurse");
-
 	// Page load
 	// How can I hide these so they won't show at load
 	// $('mods-load').hide();
@@ -28,6 +26,7 @@ $(document).ready(function() {
 	$('#inputOne').focus();
 	$('#attack').show()
 	$('#restart').hide()
+	$('#battle-go').hide()
 
 	let player = function() {
 		this.name = null;
@@ -70,18 +69,20 @@ $(document).ready(function() {
 
 	// Assign compiled stats to player1	
 	$('#create-2').on('click', function() {
-		Stats.calcStats(selectedPlayer);
+		calcStats(selectedPlayer);
 		//console.log("first selectedPlayer", selectedPlayer);
 		player1 = selectedPlayer;
 		console.log("player1", player1);
 		selectedPlayer = {};
 		//console.log("selectedPlayer", selectedPlayer);
 		$('#inputTwo').focus();
+		$('#create-2').hide()
+		$('#battle-go').show()
 	});
 
 	// Assign compiled stats to player2	
 	$('#battle-go').on('click', function() {
-		Stats.calcStats(selectedPlayer);
+		calcStats(selectedPlayer);
 		//console.log("second selectedPlayer", selectedPlayer);
 		player2 = selectedPlayer;
 		console.log("player2", player2);
@@ -106,14 +107,12 @@ $(document).ready(function() {
 				Battle.Player1Card(player1);
 				Battle.Player2Card(player2);
 				Battle.EndDOM(player1, player2)
-				//show results of 0 health for player 2
 				//whatever else it takes to end battle
 			} else if (player1.health <= 0) {
 				player1.health = 0
 				Battle.Player1Card(player1);
 				Battle.Player2Card(player2);				
 				Battle.EndDOM(player2, player1)
-				//show results of 0 health for player 2
 				//whatever else it takes to end battle
 			} else {
 				console.log("player2.health", player2.health);
@@ -121,7 +120,6 @@ $(document).ready(function() {
 				Battle.Player1Card(player1);
 				Battle.Player2Card(player2);
 				Battle.BuildDOM(player1, player2);
-				// Does this not work if both become 0
 			}	
 		} else {
 			console.log("Player 2 attacks first")
@@ -132,14 +130,12 @@ $(document).ready(function() {
 				Battle.Player1Card(player1);
 				Battle.Player2Card(player2);
 				Battle.EndDOM(player2, player1)
-				//show results of 0 health for player 2
 				//whatever else it takes to end battle
 			} else if (player2.health <= 0) {
 				player2.health = 0
 				Battle.Player1Card(player1);
 				Battle.Player2Card(player2);				
 				Battle.EndDOM(player1, player2)
-				//show results of 0 health for player 2
 				//whatever else it takes to end battle
 			} else {			
 				console.log("player1.health", player1.health);
