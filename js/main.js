@@ -9,11 +9,11 @@ const Modification = require('./mod');
 const AddModel = require('./addModel');
 const AddWeapon = require('./addWeapon');
 const AddMod = require('./addMod');
-const {calcStats} = require('./calcStats.js');
-const Calc = require('./calcDamage.js');
+const { calcStats } = require('./calcStats.js');
+const { calcDamage } = require('./calcDamage.js');
 const Battle = require('./battle.js');
-const {coinFlip} = require('./coinFlip.js');
-const {newBattle} = require('./reset.js');
+const { coinFlip } = require('./coinFlip.js');
+const { newBattle } = require('./reset.js');
 
 
 $(document).ready(function() {
@@ -70,11 +70,10 @@ $(document).ready(function() {
 	// Assign compiled stats to player1	
 	$('#create-2').on('click', function() {
 		calcStats(selectedPlayer);
-		//console.log("first selectedPlayer", selectedPlayer);
 		player1 = selectedPlayer;
 		console.log("player1", player1);
+		// Clear selected player object to build pl2
 		selectedPlayer = {};
-		//console.log("selectedPlayer", selectedPlayer);
 		$('#inputTwo').focus();
 		$('#create-2').hide()
 		$('#battle-go').show()
@@ -83,19 +82,17 @@ $(document).ready(function() {
 	// Assign compiled stats to player2	
 	$('#battle-go').on('click', function() {
 		calcStats(selectedPlayer);
-		//console.log("second selectedPlayer", selectedPlayer);
 		player2 = selectedPlayer;
 		console.log("player2", player2);
 
 		// Initiating DOM PlayerCards
 		Battle.Player1Card(player1);
 		Battle.Player2Card(player2);
-		//$('#bat-descrip').html('VS.');
 	});
 
 	$('#attack').on('click', function() {
-		let pl1Dmg = Calc.calcDamage(player1);
-		let pl2Dmg = Calc.calcDamage(player2);
+		let pl1Dmg = calcDamage(player1);
+		let pl2Dmg = calcDamage(player2);
 		console.log("pl1Dmg", pl1Dmg);
 		console.log("pl2Dmg", pl2Dmg);
 		if (coinFlip() === 0) {
