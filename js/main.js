@@ -116,7 +116,7 @@ $(document).ready(function() {
 				console.log("player1.health", player1.health);
 				Battle.Player1Card(player1);
 				Battle.Player2Card(player2);
-				Battle.BuildDOM(player1, player2);
+				Battle.BuildDOM(player1, player2, pl1Dmg, pl2Dmg);
 			}	
 		} else {
 			console.log("Player 2 attacks first")
@@ -139,7 +139,7 @@ $(document).ready(function() {
 				console.log("player2.health", player2.health);
 				Battle.Player1Card(player1);
 				Battle.Player2Card(player2);
-				Battle.BuildDOM(player2, player1);
+				Battle.BuildDOM(player2, player1, pl2Dmg, pl1Dmg);
 			}				
 		}
 	});

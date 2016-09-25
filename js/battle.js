@@ -42,14 +42,14 @@ Battle.Player2Card = (player) => {
 	$('#player2-bat').html(player2String);	
 };
 
-Battle.BuildDOM = (attacker, victim) => {
+Battle.BuildDOM = (attacker, victim, attDmg, vicDmg) => {
 	//console.log("attacker", attacker);
 	let battleString = '';
 	battleString += `
 	<div class="battle-dom">
 		<p>Round: ${counter}</p>
-		<p>${attacker.name} strikes ${victim.name} for ${attacker.damage}<p>
-		<p>${victim.name} retaliates for ${victim.damage}</p> 
+		<p>${attacker.name} strikes ${victim.name} for ${attDmg}<p>
+		<p>${victim.name} retaliates for ${vicDmg}</p> 
 	</div>`
 	$('#bat-descrip').prepend(battleString);
 	counter ++
