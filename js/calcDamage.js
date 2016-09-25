@@ -17,5 +17,5 @@ module.exports.calcDamage = (attacker) => {
 	damage = attacker.model.typeDamage + attacker.model.damage + attacker.weapon.damage + attacker.modification.damageBonus;
 
 	//return damage;
-	return Math.floor(Math.random() * (damage - 1)) + 1;
+	return Math.floor(Math.random() * (damage + 1));
 }

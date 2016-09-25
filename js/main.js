@@ -158,6 +158,3 @@ $(document).ready(function() {
 
 // Each round of battle should determine the amount of damage each robot will do with its weapon.
 // That damage should then be adjusted based on the modifications that it has, and what its opponent has.
-// Rounds continue until one of the robots has 0, or less than 0, health.
-// When the battle is over display the outcome to the user. For example...
-// The Viper Drone defeated the Behemoth ATV with its flamethrower.	
