@@ -8,12 +8,11 @@ const Weapon = require('./weapons');
 const Modification = require('./mod');
 const AddModel = require('./addModel');
 const AddWeapon = require('./addWeapon');
-const AddMod = require('./addMod');
+const { addMod } = require('./addMod');
 const { calcStats } = require('./calcStats.js');
-const { calcDamage } = require('./calcDamage.js');
-const Battle = require('./battle.js');
-const { coinFlip } = require('./coinFlip.js');
+const { player1Card, player2Card } = require('./battle.js');
 const { newBattle } = require('./reset.js');
+const { battleRound } = require('./battleSequence.js')
 
 
 $(document).ready(function() {
@@ -63,7 +62,7 @@ $(document).ready(function() {
 	});
 
 	$('.mods').on('click', function(event) {
-		AddMod.addMod(event.target.closest('.mods'), selectedPlayer);
+		addMod(event.target.closest('.mods'), selectedPlayer);
 		//console.log("selectedPlayermod", selectedPlayer);
 	});	
 
@@ -86,75 +85,14 @@ $(document).ready(function() {
 		console.log("player2", player2);
 
 		// Initiating DOM PlayerCards
-		Battle.Player1Card(player1);
-		Battle.Player2Card(player2);
+		player1Card(player1);
+		player2Card(player2);
 	});
 
 	$('#attack').on('click', function() {
-		let pl1Dmg = calcDamage(player1);
-		let pl2Dmg = calcDamage(player2);
-		console.log("pl1Dmg", pl1Dmg);
-		console.log("pl2Dmg", pl2Dmg);
-		if (coinFlip() === 0) {
-			console.log("Player one attacks first")
-			player2.health = player2.health - pl1Dmg;
-			player1.health = player1.health - pl2Dmg;
-			if (player2.health <= 0) {
-				player2.health = 0
-				Battle.Player1Card(player1);
-				Battle.Player2Card(player2);
-				Battle.EndDOM(player1, player2)
-				//whatever else it takes to end battle
-			} else if (player1.health <= 0) {
-				player1.health = 0
-				Battle.Player1Card(player1);
-				Battle.Player2Card(player2);				
-				Battle.EndDOM(player2, player1)
-				//whatever else it takes to end battle
-			} else {
-				console.log("player2.health", player2.health);
-				console.log("player1.health", player1.health);
-				Battle.Player1Card(player1);
-				Battle.Player2Card(player2);
-				Battle.BuildDOM(player1, player2, pl1Dmg, pl2Dmg);
-			}	
-		} else {
-			console.log("Player 2 attacks first")
-			player1.health = player1.health - pl2Dmg;			
-			player2.health = player2.health - pl1Dmg;
-			if (player1.health <= 0) {
-				player1.health = 0
-				Battle.Player1Card(player1);
-				Battle.Player2Card(player2);
-				Battle.EndDOM(player2, player1)
-				//whatever else it takes to end battle
-			} else if (player2.health <= 0) {
-				player2.health = 0
-				Battle.Player1Card(player1);
-				Battle.Player2Card(player2);				
-				Battle.EndDOM(player1, player2)
-				//whatever else it takes to end battle
-			} else {			
-				console.log("player1.health", player1.health);
-				console.log("player2.health", player2.health);
-				Battle.Player1Card(player1);
-				Battle.Player2Card(player2);
-				Battle.BuildDOM(player2, player1, pl2Dmg, pl1Dmg);
-			}				
-		}
+		battleRound(player1, player2)
 	});
 
 	$('#restart').click(newBattle)
 
 });
-
-// Base Logical Requirements
-
-// Once either robot's health is <0 display a message that the battle is over, and which one won. For example...
-// The Viper Drone defeated the Behemoth ATV with its flamethrower.
-
-
-// Bonus Logical Requirements
-
-// Each round of battle should determine the amount of damage each robot will do with its weapon.
-// That damage should then be adjusted based on the modifications that it has, and what its opponent has.

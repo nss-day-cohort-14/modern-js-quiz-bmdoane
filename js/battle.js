@@ -1,16 +1,13 @@
-"use strict";
+"use strict"
 
 var $ = require('jquery');
-//const Calc = require('calcDamage.js');
-
-const Battle = {};
 
 let currentPlayer1 = {};
 let currentPlayer2 = {};
 
 let counter = 1;
 
-Battle.Player1Card = (player) => {
+module.exports.player1Card = (player) => {
 	//console.log("ur mom");
 	let player1String = '';
 	player1String += `
@@ -26,7 +23,7 @@ Battle.Player1Card = (player) => {
 	$('#player1-bat').html(player1String);
 };
 
-Battle.Player2Card = (player) => {
+module.exports.player2Card = (player) => {
 	//console.log("ur mom's mom");
 	let player2String = '';
 	player2String += `
@@ -42,7 +39,7 @@ Battle.Player2Card = (player) => {
 	$('#player2-bat').html(player2String);	
 };
 
-Battle.BuildDOM = (attacker, victim, attDmg, vicDmg) => {
+module.exports.buildDOM = (attacker, victim, attDmg, vicDmg) => {
 	//console.log("attacker", attacker);
 	let battleString = '';
 	battleString += `
@@ -55,7 +52,7 @@ Battle.BuildDOM = (attacker, victim, attDmg, vicDmg) => {
 	counter ++
 };
 
-Battle.EndDOM = (winner, loser) => {
+module.exports.endDOM = (winner, loser) => {
 	let endString = '';
 	endString = `
 	<div class="battle-dom">
@@ -65,5 +62,3 @@ Battle.EndDOM = (winner, loser) => {
 	$('#attack').hide()
 	$('#restart').show()
 }
-
-module.exports = Battle;
