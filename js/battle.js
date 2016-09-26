@@ -1,21 +1,20 @@
-"use strict";
+"use strict"
 
 var $ = require('jquery');
-//const Calc = require('calcDamage.js');
-
-const Battle = {};
 
 let currentPlayer1 = {};
 let currentPlayer2 = {};
 
-Battle.counter = 0;
+let counter = 1;
 
-Battle.Player1Card = (player) => {
+module.exports.player1Card = (player) => {
 	//console.log("ur mom");
 	let player1String = '';
 	player1String += `
 	<div class="pc1">
-		<p>${player.name}</p>
+		<div class="card-header">
+			<p>${player.name}</p>
+		</div>
 		<p>Operating Model ${player.model.modelName}</p>
 		<p>Weapon of choice:</p>
 		<p>${player.weapon.name}</p>
@@ -24,12 +23,14 @@ Battle.Player1Card = (player) => {
 	$('#player1-bat').html(player1String);
 };
 
-Battle.Player2Card = (player) => {
+module.exports.player2Card = (player) => {
 	//console.log("ur mom's mom");
 	let player2String = '';
 	player2String += `
 	<div class="pc2">
-		<p>${player.name}</p>
+		<div class="card-header">
+			<p>${player.name}</p>
+		</div>
 		<p>Operating Model ${player.model.modelName}</p>
 		<p>Weapon of choice:</p>
 		<p>${player.weapon.name}</p>		
@@ -38,28 +39,20 @@ Battle.Player2Card = (player) => {
 	$('#player2-bat').html(player2String);	
 };
 
-// Battle.BuildDOM = () => {
-// 	console.log("Trebek's mom");
-// 	let battleString = '';
-// 	battleString += `
-// 	<div class="battle-dom">
-// 		Trebek's mom
-// 	</div>`
-// 	$('#bat-descrip').html(battleString);
-// };
-
-Battle.BuildDOM = (attacker, victim) => {
+module.exports.buildDOM = (attacker, victim, attDmg, vicDmg) => {
 	//console.log("attacker", attacker);
 	let battleString = '';
 	battleString += `
 	<div class="battle-dom">
-		<p>${attacker.name} strikes ${victim.name} for ${attacker.damage}<p>
-		<p>${victim.name} retaliates for ${victim.damage}</p> 
+		<p>Round: ${counter}</p>
+		<p>${attacker.name} strikes ${victim.name} for ${attDmg}<p>
+		<p>${victim.name} retaliates for ${vicDmg}</p> 
 	</div>`
 	$('#bat-descrip').prepend(battleString);
+	counter ++
 };
 
-Battle.EndDOM = (winner, loser) => {
+module.exports.endDOM = (winner, loser) => {
 	let endString = '';
 	endString = `
 	<div class="battle-dom">
@@ -69,5 +62,3 @@ Battle.EndDOM = (winner, loser) => {
 	$('#attack').hide()
 	$('#restart').show()
 }
-
-module.exports = Battle;

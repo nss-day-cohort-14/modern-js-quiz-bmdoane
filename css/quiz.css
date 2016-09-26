@@ -52,11 +52,12 @@ button {
 	border: 2px solid red;
 	border-radius: 5px;
 	height: 200px;
+	overflow: hidden;
 } 
 
-.battle-dom {
-
-}
+/*.battle-dom {
+	overflow: hidden;
+}*/
 
 /* Footer */
 .footer {
