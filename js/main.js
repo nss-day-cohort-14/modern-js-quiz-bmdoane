@@ -6,8 +6,8 @@ const Type = require('./type');
 const Model = require('./model');
 const Weapon = require('./weapons');
 const Modification = require('./mod');
-const AddModel = require('./addModel');
-const AddWeapon = require('./addWeapon');
+const { addModel } = require('./addModel');
+const { addWeapon } = require('./addWeapon');
 const { addMod } = require('./addMod');
 const { calcStats } = require('./calcStats.js');
 const { player1Card, player2Card } = require('./battle.js');
@@ -50,14 +50,14 @@ $(document).ready(function() {
 	});
 
 	$('.robots').on('click', function(event) {
-		AddModel.addModel(event.target.closest('.robots'), selectedPlayer);
+		addModel(event.target.closest('.robots'), selectedPlayer);
 		//console.log("selectedPlayerrob", selectedPlayer);
 		// $('.robots-load').addClass('hide');
 		// $('.weapons-load').removeClass('hide');
 	});
 
 	$('.weapons').on('click', function(event) {
-		AddWeapon.addWeapon(event.target.closest('.weapons'), selectedPlayer);
+		addWeapon(event.target.closest('.weapons'), selectedPlayer);
 		//console.log("selectedPlayerweap", selectedPlayer);
 	});
 
