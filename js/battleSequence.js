@@ -4,6 +4,7 @@ const { player1Card, player2Card, buildDOM, endDOM } = require('./battle.js');
 const { calcDamage } = require('./calcDamage.js');
 const { coinFlip } = require('./coinFlip.js');
 
+// Look at refactoring in case both die in same round
 module.exports.battleRound = (player1, player2) => {
 	let pl1Dmg = calcDamage(player1);
 	let pl2Dmg = calcDamage(player2);
